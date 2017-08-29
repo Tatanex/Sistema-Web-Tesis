@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+;;files to ignore
+settings.py
+
+;;extensions to ignore
+*.log
+*.pot
+*.pyc
+
+;;directories to ignore
+.idea/
