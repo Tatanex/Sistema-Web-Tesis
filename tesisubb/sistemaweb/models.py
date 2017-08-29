@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+
 from django.db import models
 
 
 # Create your models here.
+from django.urls import reverse
+
+from .validators import validacion_extension_epw, validacion_extension_idf
 
 
 class Construccion(models.Model):
@@ -37,11 +41,18 @@ class Material(models.Model):
 
 class Simular(models.Model):
     simular_id = models.AutoField(primary_key=True)
-    simular_clima = models.FileField(upload_to='epw/')
-    simular_archivo_idf = models.FileField(upload_to='idf/')
+    simular_clima = models.FileField(upload_to='epw/', validators=[validacion_extension_epw])
+    simular_archivo_idf = models.FileField(upload_to='idf/', validators=[validacion_extension_idf])
 
     def __unicode__(self):  # __unicode__ on Python 2
-        return self.simular_clima
+        return self.simular_id
+
+    def __str__(self):
+        return self.simular_id
+
+    def __get_absolute_url__(self):
+        return reverse('simular:detail', kwargs={ "id":self.simular_id })
+
 
 
 
