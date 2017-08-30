@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
-{% block title %} Prototipo WEB | Simular IDF {% endblock %}
-{% block header %} <h2> Simular IDF </h2> {% endblock %}
+{% block title %} Simular IDF | Simulación {{ simulacion.simular_id }}{% endblock %}
+{% block header %} <h2> Simular IDF  </h2> {% endblock %}
 
 
 {% load static  %}
@@ -10,53 +10,49 @@
 
 
 {% block content %}
-  <!--<div >-->
-    <!--<div>-->
-      <!--<div class="container">-->
-        <!--<div class="page-header">-->
-          <!--<h1>Cargar Archivo IDF</h1>-->
-        <!--</div>-->
 
-        <!--<form>-->
-          <!--<div class="form-group">-->
-            <!--<label for="fileName">Seleccionar archivo IDF</label>-->
-            <!--<div class="input-group">-->
-              <!--<input type="text" id="fileName" class="form-control">-->
-              <!--<span class="input-group-addon btn btn-primary btn-file">-->
-              <!--<span class="fileinput-new">Buscar</span>-->
-              <!--<span class="fileinput-exists">Change</span>-->
-                   <!--<input type="file" name="...">-->
-              <!--</span>-->
-            <!--</div>-->
-          <!--</div>-->
+    <div class="page-header">
+          <h2>Identificador de simulación: {{ simulacion.simular_id }} </h2>
+    </div>
 
-          <!--<div>-->
-            <!--<button type="reset" class="btn btn-default">Limpiar</button>-->
-            <!--<button type="button" class="btn btn-primary">Cargar</button>-->
-          <!--</div>-->
-        <!--</form>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+   
 
+           <div class="animated flipInY col-lg-6 col-md-6 col-sm-8 col-xs-16">
+                              <div class="tile-stats">
+                                    <div class="tile_header"><span>NOMBRE: </span> {{ simulacion.simular_archivo_idf  }} </div>
+                                    <!--<div class="count"> {{ simulacion.simular_archivo_idf }} </div>-->
 
-  <!--<script>-->
-      <!--$("#btn_upload").click(function(e){-->
-      <!--e.preventDefault();-->
-      <!--$("#fileupload").trigger('click');-->
-      <!--});-->
-  <!--</script>-->
+                                        <div>
+                                            <h3> Archivo IDF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-file-o fa-2x"></span></h3>
+                                            <p>ARCHIVO DE SIMULACIÓN.</p>
 
-     <div class="date">
-        {% if form.simular_clima %}
-            {{ form.simular_clima }}
-        {% endif %}
-        <a class="btn btn-default" href="{% url 'simular' pk=a %}"><span class="glyphicon glyphicon-pencil"></span></a>
-        </div>
-        <h1>{{ form.simular_archivo_idf }}</h1>
-        <p>{{ form.simular_archivo_idf|linebreaksbr }}</p>
+                                        </div>
+                              </div>
+           </div>
+           <div class="animated flipInY col-lg-6 col-md-6 col-sm-8 col-xs-16">
+                              <div class="tile-stats">
+                                    <div class="tile_header"><span>NOMBRE: </span> {{ simulacion.simular_clima }} </div>
+                                    <!--<div class="count"> {{ simulacion.simular_archivo_idf }} </div>-->
+
+                                        <div>
+                                            <h3> Archivo EPW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-file-o fa-2x"></span></h3>
+                                            <p>ARCHIVO DE CLIMA.</p>
+
+                                        </div>
+                              </div>
+           </div>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+           <div class="col-md-5 col-md-offset-5">
+               <button type="button" class="btn btn-info btn-lg">Simular</button>
+           </div>
+
 
 {% endblock %}
 
 
 {% load static  %}
+
+
