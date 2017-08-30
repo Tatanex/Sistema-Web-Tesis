@@ -20,17 +20,15 @@
           <h1>Cargar Archivo IDF</h1>
         </div>
 
+
+
+
                <form  role="form"  enctype="multipart/form-data" action="" method="POST" id="upload-image-form">
-
                    {% csrf_token %}
-                   {{ form.as_p }}
-
-
+                   {{  form.as_p }}
                    <br>
-
-
               <div>
-                <button type="submit" class="btn btn-primary" id='upload-btn'>Simular</button>
+                <button type="submit" class="btn btn-primary" id='upload-btn'>Cargar Archivos</button>
               </div>
             </form>
       </div>
