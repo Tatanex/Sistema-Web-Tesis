@@ -10,7 +10,7 @@ urlpatterns = [
     # url('/', views.index, name='index'),
     url('index', views.indexView, name='index'),
     url ('upload', views.cargar_archivo_simulacion_view, name='upload'),
-    url (r'^simular/(\d+)/$', views.simularView),
+    url (r'^simular/(\d+)/$', views.simularView, name='simular'),
 ]
 
 
