@@ -1,21 +1,59 @@
 {% extends 'layout.html' %}
+{% load staticfiles %}
+
 
 
 {% block jumbotron %}
  {% if message %}
       <div class='alert alert-info'>
-
       </div>
     {% endif %}
-
 {% endblock %}
-
-
 
 {% block content %}
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                 <p class="text-muted font-13 m-b-30">
+                    <h2>Lista de simulaciones.</h2>
+                 </p>
+                 <br>
+                 <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre IDF</th>
+                        <th>Clima</th>
+                        <th>Archivo de simulación</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       {% for simular in lista_simular %}
+                      <tr>
+                              <td> {{ simular.simular_id }} </td>
+                              <td>{{ simular.simular_archivo_idf }}</td>
+                              <td>{{ simular.simular_clima}}</td>
+                              <td><a href="ver/simulacion_{{ simular.simular_id }}">Reporte Simulación</a></td>
+                      </tr>
+                     {% endfor %}
+                    </tbody>
+                 </table>
+            </div>
+        </div>
 
 
 
-{% endfor %}
+ </div>
+ <div id="custom_notifications" class="custom-notifications dsp_none">
+          <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+          </ul>
+          <div class="clearfix"></div>
+          <div id="notif-group" class="tabbed_notifications"></div>
+ </div>
 
 {% endblock %}
+
+{% load staticfiles %}
+
+
