@@ -51,7 +51,16 @@ class Simular(models.Model):
     #
 
 
+class Comparar(models.Model):
+    comparar_id = models.AutoField(primary_key=True)
+    comparar_archivo_idf1 = models.FileField(upload_to='comparacion_idf/', validators=[validacion_extension_idf])
+    comparar_archivo_idf2 = models.FileField(upload_to='comparacion_idf/', validators=[validacion_extension_idf])
+    # comparar_archivo_idf1 = models.FileField(validators=[validacion_extension_idf])
+    # comparar_archivo_idf2 = models.FileField(validators=[validacion_extension_idf])
 
+
+    def __unicode__(self):
+        return str(self)
 
 
 class ReporteSimulacion(models.Model):
@@ -67,3 +76,11 @@ class ReporteSimulacion(models.Model):
 
 
 
+
+class Modificar(models.Model):
+    modificar_id = models.AutoField(primary_key=True)
+    modificar_archivo_idf = models.FileField( validators=[validacion_extension_idf])
+
+
+    def __unicode__(self):
+        return str(self)
