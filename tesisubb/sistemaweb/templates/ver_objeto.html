@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+{% load static  %}
+
+{% block jumbotron %}
+ {% if message %}
+      <div class='alert alert-info'>
+       <span> {{ message }}</span>
+      </div>
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+
+<!-- top tiles -->
+        <div class="row tile_count" align="center">
+             <div class="animated flipInY col-md-6 col-sm-6 col-xs-12 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"> NOMBRE CLASE </span>
+              <div class="count">{{ args_class }}</div>
+            </div>
+          </div>
+          <div class="animated flipInY col-md-6 col-sm-6 col-xs-12 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"> NOMBRE OBJETO </span>
+              <div class="count">{{ args_name }}</div>
+            </div>
+          </div>
+
+
+
+        </div>
+        <!-- /top tiles -->
+
+
+
+
+ <table class="table table-bordered">
+         <thead>
+             <tr>
+             <th>Nombre Atributo</th>
+             <th>Unidad de Medida</th>
+             <th>Valor Atributo</th>
+             </tr>
+         </thead>
+         <tbody>
+
+
+         {% for a,b in list   %}
+               <tr>
+                 {% if  a  == 'key'  %}
+                   <td> Clase objeto </td>
+                   <td>  </td>
+                   <td> {{ b }} </td>
+                {% else %}
+                    {% if  a  == 'Thickness'  %}
+                   <td> {{ a }} </td>
+                   <td> m </td>
+                   <td> {{ b }} </td>
+                {% else %}
+                   {% if  a  == 'Conductivity'  %}
+                   <td> {{ a }} </td>
+                   <td> W/m-k </td>
+                   <td> {{ b }} </td>
+                {% else %}
+                   {% if  a  == 'Density'  %}
+                   <td> {{ a }} </td>
+                   <td> kg/m3 </td>
+                   <td> {{ b }} </td>
+                {% else %}
+                   {% if  a  == 'Specific_Heat'  %}
+                   <td> {{ a }} </td>
+                   <td> J/kg-K </td>
+                   <td> {{ b }} </td>
+                {% else %}
+                   <td> {{ a }} </td>
+                   <td>  </td>
+                   <td> {{ b }} </td>
+
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+
+
+               </tr>
+         {% endfor %}
+         </tbody>
+ </table>
+
+{% endblock %}
+
+{% load static  %}
