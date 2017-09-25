@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">-->
 
-
   <link href="{% static 'fonts/css/font-awesome.min.css' %}" rel="stylesheet">
   <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
 
@@ -23,41 +22,19 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.4/jquery-jvectormap.css" />
   <link href="{% static 'css/icheck/flat/green.css' %}" rel="stylesheet" />
   <link href="{% static 'css/floatexamples.css' %}" rel="stylesheet" type="text/css" />
-
-
   <link href="{% static 'js/datatables/jquery.dataTables.min.css' %}" rel="stylesheet" />
   <link href="{% static 'js/datatables/buttons.bootstrap.min.css' %}" rel="stylesheet" />
   <link href="{% static 'js/datatables/fixedHeader.bootstrap.min.css' %}" rel="stylesheet" />
-
-
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'js/nprogress.js' %}"></script>
-
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
-
-
   <script src="{% static 'assets/js/ie8-responsive-file-warning.js' %}"></script>
-
-
-
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
-
-
   <!--<script src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script>-->
-
-
-
-
-
-
-
 </head>
-
-
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
@@ -97,109 +74,81 @@
                     </li>
                   </ul>
                 </li>
-                <!--<li><a href="{% url 'upload' %}"><i class="fa fa-edit"></i> Simular IDF <span class="fa fa-chevron-down"></span></a>-->
-                  <!--<ul class="nav child_menu" style="display: none">-->
-                    <!--<li><a href="">Ver Simulaciones</a>-->
-                    <!--</li>-->
-                    <!--<li><a href="">Simular</a>-->
-                    <!--</li>-->
-                  <!--</ul>-->
-                <!--</li>-->
-                <li><a><i class="fa fa-desktop"></i> Modificar IDF <span class="fa fa-chevron-down"></span></a>
-
+                <li><a href="{% url 'modificar' %}" ><i class="fa fa-desktop"></i> Modificar IDF <span class="fa fa-chevron-down"></span></a>
                 </li>
                 <li><a><i class="fa fa-table"></i> Comparar IDF's <span class="fa fa-chevron-down"></span></a>
-
+                   <ul class="nav child_menu" style="display: none">
+                    <li><a href="{% url 'ver_comparaciones' %}">Ver Comparaciones</a>
+                    </li>
+                    <li><a href="{% url 'comparar' %}">Comparar</a>
+                    </li>
+                  </ul>
                 </li>
                 <li><a><i class="fa fa-bar-chart-o"></i> Combinar IDF's <span class="fa fa-chevron-down"></span></a>
-
                 </li>
               </ul>
             </div>
           </div>
           <!-- /sidebar menu -->
-
           <!-- /menu footer buttons -->
           <div class="sidebar-footer hidden-small">
-
           </div>
           <!-- /menu footer buttons -->
         </div>
       </div>
-
       <!-- top navigation -->
       <div class="top_nav">
-
         <div class="nav_menu">
           <nav class="" role="navigation">
             <div class="nav toggle">
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
-
             <ul class="nav navbar-nav navbar-right" >
               <li class=""  style="padding-right:3%">
-
                 <a><span>   <img src="{% static 'images/ubb.png' %}" alt=""> Universidad del Bío-Bío</span>
-
                   <!--<img src="../static/images/ubb.png" alt=""> Universidad del Bío-Bío-->
                   <!--<span class=" fa fa-angle-down"></span>-->
                 </a>
-
               </li>
-
               <li role="presentation" class="dropdown">
-
-
               </li>
-
             </ul>
           </nav>
         </div>
-
       </div>
       <!-- /top navigation -->
-
         <!-- page content -->
       <div class="right_col" role="main">
-
            <!-- top tiles -->
-        <div class="row tile_count">
-          <div class="animated flipInY col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Cantidad de alternativas </span>
-              <div class="count">5</div>
-              <!--<span class="count_bottom"><i class="green">4% </i> From last Week</span>-->
-            </div>
-          </div>
-          <div class="animated flipInY col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Cantidad de climas </span>
-              <div class="count">10</div>
-              <!--<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>-->
-            </div>
-          </div>
-          <div class="animated flipInY col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Combinaciones </span>
-              <div class="count green">25</div>
-              <!--<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>-->
-            </div>
-          </div>
-        </div>
+        <!--<div class="row tile_count">-->
+          <!--<div class="animated flipInY col-md-4 col-sm-8 col-xs-12 tile_stats_count">-->
+            <!--<div class="left"></div>-->
+            <!--<div class="right">-->
+              <!--<span class="count_top"><i class="fa fa-user"></i> Cantidad de alternativas </span>-->
+              <!--<div class="count">5</div>-->
+              <!--&lt;!&ndash;<span class="count_bottom"><i class="green">4% </i> From last Week</span>&ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="animated flipInY col-md-4 col-sm-8 col-xs-12 tile_stats_count">-->
+            <!--<div class="left"></div>-->
+            <!--<div class="right">-->
+              <!--<span class="count_top"><i class="fa fa-clock-o"></i> Cantidad de climas </span>-->
+              <!--<div class="count">10</div>-->
+              <!--&lt;!&ndash;<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>&ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="animated flipInY col-md-4 col-sm-8 col-xs-12 tile_stats_count">-->
+            <!--<div class="left"></div>-->
+            <!--<div class="right">-->
+              <!--<span class="count_top"><i class="fa fa-user"></i> Combinaciones </span>-->
+              <!--<div class="count green">25</div>-->
+              <!--&lt;!&ndash;<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>&ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
         <!-- /top tiles -->
-
-
-
       {% block jumbotron %}
-
-
       {% endblock %}
-
-
-
         <div class="">
           <div class="clearfix"></div>
           <div class="row">
@@ -210,38 +159,27 @@
                   <div class="clearfix"></div>
                 </div>
                 <div >
-
-
-
-
-
                   {% block content %}
                   {% endblock %}
-
                 </div>
-
                 </div>
               </div>
             </div>
           </div>
         </div>
-
         <!-- footer content -->
         <footer>
-
           <div class="copyright-info">
             <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
             </p>
           </div>
           <div class="clearfix"></div>
-
         </footer>
         <!-- /footer content -->
       </div>
       <!-- /page content -->
     </div>
   </div>
-
 
 
 {% load staticfiles %}
