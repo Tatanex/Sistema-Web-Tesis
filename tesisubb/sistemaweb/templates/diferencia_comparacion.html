@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% load static  %}
+
+{% block jumbotron %}
+ {% if message %}
+      <div class='alert alert-info'>
+       <span> {{ message }}</span>
+      </div>
+    {% endif %}
+{% endblock %}
+{% block content %}
+ <div class="page-header">
+          <h1>Diferencias de comparación</h1>
+ </div>
+
+<!--{{ comparacion.comparar_archivo_idf1 }}-->
+<!--{{ comparacion.comparar_archivo_idf2 }}-->
+
+{% for keys,values in resultado_alternativa.items %}
+                  <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                      <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h4 class="panel-title">  CLASE   {{ keys }}</h4>
+                      </a>
+                      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Nombre objeto</th>
+                                <th>Ver Material</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            {% for value in values %}
+                                        <tr>
+                                          <th scope="row">{{ forloop.counter }} </th>
+                                          <td>{{ value }}</td>
+                                          <td><a href="detalle/{{ id_comparacion }}/{{ keys }}/{{ value }}" id="idfs"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                        </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+                  </div>
+                  </div>
+{% endfor %}
+{% endblock %}
+
+
+{% load static  %}
