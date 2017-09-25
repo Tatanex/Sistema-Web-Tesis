@@ -23,8 +23,8 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Nombre IDF</th>
-                        <th>Clima</th>
+                        <th>Archivo IDF</th>
+                        <th>Archivo Clima</th>
                         <th>Archivo de simulación</th>
                       </tr>
                     </thead>
@@ -34,17 +34,15 @@
                               <td> {{ simular.simular_id }} </td>
                               <td>{{ simular.simular_archivo_idf }}</td>
                               <td>{{ simular.simular_clima}}</td>
-                              <td><a href="ver/simulacion_{{ simular.simular_id }}">Reporte Simulación</a></td>
+                              <td><a href="ver/simulacion_{{ simular.simular_id }}" class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Reporte Simulación </a>
                       </tr>
                      {% endfor %}
                     </tbody>
                  </table>
             </div>
         </div>
-
-
-
  </div>
+
  <div id="custom_notifications" class="custom-notifications dsp_none">
           <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
           </ul>
