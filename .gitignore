@@ -10,3 +10,6 @@
 ;;directories to ignore
 .idea/
 media/
+simulaciones/
+utils/
+tesisubb/sistemaweb/migrations/
