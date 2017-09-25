@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+
+
+
+{% block jumbotron %}
+ {% if message %}
+      <div class='alert alert-info'>
+      </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                 <p class="text-muted font-13 m-b-30">
+                    <h2>Lista de comparaciones.</h2>
+                 </p>
+                 <br>
+                 <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Archivo IDF #1</th>
+                        <th>Archivo IDF #2</th>
+                        <th>Archivo de simulación</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       {% for comparacion in lista_comparaciones %}
+                      <tr>
+                              <td> {{ comparacion.comparar_id }} </td>
+                              <td>{{ comparacion.comparar_archivo_idf1 }}</td>
+                              <td>{{ comparacion.comparar_archivo_idf2 }}</td>
+                              <td><a href="diferencia_comparacion/{{ comparacion.comparar_id }}" class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver Comparación </a>
+                      </tr>
+                     {% endfor %}
+                    </tbody>
+                 </table>
+            </div>
+        </div>
+ </div>
+
+ <div id="custom_notifications" class="custom-notifications dsp_none">
+          <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+          </ul>
+          <div class="clearfix"></div>
+          <div id="notif-group" class="tabbed_notifications"></div>
+ </div>
+
+{% endblock %}
+
+{% load staticfiles %}
+
+
