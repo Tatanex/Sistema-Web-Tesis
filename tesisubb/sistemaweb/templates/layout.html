@@ -2,8 +2,12 @@
 
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <!-- Meta, title, CSS, favicons, etc. -->
+
+
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,11 +18,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">-->
 
+
+
   <link href="{% static 'fonts/css/font-awesome.min.css' %}" rel="stylesheet">
   <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
 
   <!-- Custom styling plus plugins -->
   <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+  <link href="{% static 'css/upload.css' %}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.4/jquery-jvectormap.css" />
   <link href="{% static 'css/icheck/flat/green.css' %}" rel="stylesheet" />
   <link href="{% static 'css/floatexamples.css' %}" rel="stylesheet" type="text/css" />
@@ -64,7 +71,7 @@
                 &nbsp;
                 &nbsp;
               <ul class="nav side-menu">
-                <li><a href="{% url 'index' %}"><i class="fa fa-home"></i> Inicio </a>
+                <li><a href="{%   url 'index' %}"><i class="fa fa-home"></i> Inicio </a>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Simular IDF <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
@@ -74,7 +81,13 @@
                     </li>
                   </ul>
                 </li>
-                <li><a href="{% url 'modificar' %}" ><i class="fa fa-desktop"></i> Modificar IDF <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-desktop"></i> Modificar IDF <span class="fa fa-chevron-down"></span></a>
+                 <ul class="nav child_menu" style="display: none">
+                    <li><a href="{% url 'ver_modificaciones' %}">Ver Modificaciones</a>
+                    </li>
+                    <li><a href="{% url 'cargar_modificacion' %}" >Modificar</a>
+                    </li>
+                  </ul>
                 </li>
                 <li><a><i class="fa fa-table"></i> Comparar IDF's <span class="fa fa-chevron-down"></span></a>
                    <ul class="nav child_menu" style="display: none">
@@ -84,7 +97,13 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-bar-chart-o"></i> Combinar IDF's <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-bar-chart-o"></i> Materiales <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none">
+                    <li><a href="{% url 'ver_materials' %}">Ver listado de materiales </a>
+                    </li>
+                    <li><a href="{% url 'crear_materials' %}">Agregar Material</a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>
@@ -147,8 +166,7 @@
           <!--</div>-->
         <!--</div>-->
         <!-- /top tiles -->
-      {% block jumbotron %}
-      {% endblock %}
+
         <div class="">
           <div class="clearfix"></div>
           <div class="row">
@@ -160,6 +178,53 @@
                 </div>
                 <div >
                   {% block content %}
+                   {% block jumbotron %}
+                   {% endblock %}
+
+                  <div class="row">
+                    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                      <div class="tile-stats">
+                        <div class="icon"><i class="fa fa-caret-square-o-right"></i>
+                        </div>
+                        <div class="count"> {{ simulacion }} </div>
+
+                        <h3>Simulaciones</h3>
+                        <p>Última simulación.</p>
+                      </div>
+                    </div>
+                    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                      <div class="tile-stats">
+                        <div class="icon"><i class="fa fa-comments-o"></i>
+                        </div>
+                        <div class="count">{{ modificacion }} </div>
+
+                        <h3>Modificaciones</h3>
+                        <p>Última modificación.</p>
+                      </div>
+                    </div>
+                    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                      <div class="tile-stats">
+                        <div class="icon"><i class="fa fa-sort-amount-desc"></i>
+                        </div>
+                        <div class="count">{{ comparacion }} </div>
+
+                        <h3>Comparaciones</h3>
+                        <p>Última comparación.</p>
+                      </div>
+                    </div>
+                    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                      <div class="tile-stats">
+                        <div class="icon"><i class="fa fa-check-square-o"></i>
+                        </div>
+                        <div class="count">179</div>
+
+                        <h3>Combinaciones</h3>
+                        <p>Última combinación.</p>
+                      </div>
+                    </div>
+                  </div>
+
+
                   {% endblock %}
                 </div>
                 </div>
@@ -170,7 +235,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            <p class="pull-right">Proyecto de tesis -  Universidad del Bío-Bío
             </p>
           </div>
           <div class="clearfix"></div>
@@ -199,6 +264,21 @@
 <script src="{% static 'js/datatables/dataTables.responsive.min.js' %}"></script>
 <script src="{% static 'js/datatables/responsive.bootstrap.min.js' %}"></script>
 <script src="{% static 'js/datatables/dataTables.scroller.min.js' %}"></script>
+
+
+
+
+  <!-- upload -->
+<script src="{% static 'js/upload.js' %}"></script>
+
+  <!-- validator -->
+<script src="{% static 'js/validator/validator.js' %}"></script>
+
+
+  <!-- validator parsley -->
+<script src="{% static 'js/parsley/parsley.min.js' %}"></script>
+
+
 
 
   <!-- pace -->
@@ -525,8 +605,6 @@
   </script>
   <!-- /datepicker -->
   <!-- /footer content -->
-
-
 
 
 
