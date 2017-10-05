@@ -1,6 +1,12 @@
 {% extends 'layout.html' %}
 {% load static  %}
 
+
+
+
+
+
+
 {% block jumbotron %}
  {% if message %}
       <div class='alert alert-info'>
@@ -11,32 +17,44 @@
 {% block content %}
 
 
+
 <!-- top tiles -->
-        <div class="row tile_count" align="center">
-             <div class="animated flipInY col-md-6 col-sm-6 col-xs-12 tile_stats_count">
+      <div class="row tile_count" align="center" >
+            <div class="animated flipInY  tile_stats_count" >
             <div class="left"></div>
-            <div class="right">
-              <span class="count_top"> NOMBRE CLASE </span>
-              <div class="count">{{ args_class }}</div>
+            <div class="center_title" align="center">
+              <span  class="count_top"> NOMBRE CLASE </span>
+              <div class="count" style="font-size: 27px">{{ args_class }}</div>
             </div>
-          </div>
-          <div class="animated flipInY col-md-6 col-sm-6 col-xs-12 tile_stats_count">
+            </div>
+
+                <div class="animated flipInY tile_stats_count" >
+                <div class="left"></div>
+                <div class="right" align="center">
+                  <span class="count_top"> NOMBRE OBJETO COMERCIAL </span>
+                      {% for a in materials  %}
+                         {% if args_name == a.materials_dsb_name %}
+                            <div class="count" style="font-size: 27px"> {{ a.materials_name }}</div>
+                         {% else %}
+                            <div class="count" style="font-size: 27px"></div>
+                         {% endif %}
+                      {% endfor %}
+                </div>
+                </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="animated flipInY col-md-3 col-sm-3  tile_stats_count">
             <div class="left"></div>
-            <div class="right">
+            <div class="right" align="center">
               <span class="count_top"> NOMBRE OBJETO </span>
-              <div class="count">{{ args_name }}</div>
+              <div class="count" style="font-size: 27px">{{ args_name }}</div>
             </div>
           </div>
-
-
-
         </div>
         <!-- /top tiles -->
 
 
 
-
- <table class="table table-bordered">
+<table class="table table-bordered" align="center">
          <thead>
              <tr>
              <th>Nombre Atributo</th>
@@ -89,6 +107,10 @@
          {% endfor %}
          </tbody>
  </table>
+
+
+
+
 
 {% endblock %}
 
