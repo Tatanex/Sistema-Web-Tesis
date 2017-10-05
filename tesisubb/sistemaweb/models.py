@@ -5,7 +5,7 @@ from django.db import models
 from django.urls import reverse
 from django.core.management.base import BaseCommand
 from subprocess import Popen
-from django.utils.encoding import python_2_unicode_compatible
+from django.utils.encoding import python_2_unicode_compatible, force_bytes
 
 from .validators import validacion_extension_epw, validacion_extension_idf
 
@@ -55,8 +55,6 @@ class Comparar(models.Model):
     comparar_id = models.AutoField(primary_key=True)
     comparar_archivo_idf1 = models.FileField(upload_to='comparacion_idf/', validators=[validacion_extension_idf])
     comparar_archivo_idf2 = models.FileField(upload_to='comparacion_idf/', validators=[validacion_extension_idf])
-    # comparar_archivo_idf1 = models.FileField(validators=[validacion_extension_idf])
-    # comparar_archivo_idf2 = models.FileField(validators=[validacion_extension_idf])
 
 
     def __unicode__(self):
@@ -79,8 +77,33 @@ class ReporteSimulacion(models.Model):
 
 class Modificar(models.Model):
     modificar_id = models.AutoField(primary_key=True)
-    modificar_archivo_idf = models.FileField( validators=[validacion_extension_idf])
+    modificar_archivo_idf = models.FileField(upload_to='modificacion_idf/', validators=[validacion_extension_idf])
+
+    def __unicode__(self):
+        return str(self)
+
+
+    def __str__(self):
+        return force_bytes (self)
+
+
+class Materials(models.Model):
+    materials_id = models.AutoField(primary_key=True)
+    materials_name = models.CharField (max_length=150)
+    materials_dsb_name = models.CharField (max_length=140)
+    MATERIALS_TYPES = (
+         ('MA', 'MATERIAL'),
+         ('NO', 'MATERIAL_NOMASS'),
+         ('GL', 'WINDOWS_MATERIAL_GLAZING'),
+         ('GA', 'WINDOWS_MATERIAL_GAS'),
+    )
+    materials_type = models.CharField (max_length=2, choices=MATERIALS_TYPES)
 
 
     def __unicode__(self):
         return str(self)
+
+
+    def __str__(self):
+        return force_bytes (self)
+
