@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% block header %}  <h2>Modificación IDF's  <small>PROTOTIPO WEB</small></h2> {% endblock %}
+
+
+
+{% block jumbotron %}
+ {% if message %}
+      <div class='alert alert-info'>
+      </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                 <p class="text-muted font-13 m-b-30">
+                    <h2>Lista de materiales.</h2>
+                 </p>
+                 <br>
+                 <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre Material</th>
+                        <th>Nombre DesignBuilder</th>
+                        <th>Tipo Material</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       {% for materials in lista_materials %}
+                      <tr>
+                              <td> {{ materials.materials_id }} </td>
+                              <td>{{ materials.materials_name }}</td>
+                              <td>{{ materials.materials_dsb_name }}</td>
+
+                                 {% if materials.materials_type == 'MA' %}
+                                 <td> Material </td>
+                                 {% endif %}
+                                 {% if materials.materials_type == 'NO' %}
+                                  <td> Material:NoMass </td>
+                                 {% endif %}
+                                 {% if materials.materials_type == 'GL' %}
+                                  <td> Windows Material Glazing </td>
+                                 {% endif %}
+                                 {% if materials.materials_type == 'GA' %}
+                                  <td> Windows Material Gas </td>
+                                 {% endif %}
+
+                              <!--<td><a href="modificar/{{ modificacion.modificar_id  }}" class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Modificar </a></td>-->
+                      </tr>
+                     {% endfor %}
+                    </tbody>
+                 </table>
+            </div>
+        </div>
+ </div>
+
+
+
+{% endblock %}
+
+{% load staticfiles %}
+
