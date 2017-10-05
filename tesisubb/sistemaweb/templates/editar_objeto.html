@@ -1,0 +1,206 @@
+{% extends 'layout.html' %}
+{% load static  %}
+{% block header %}  <h2>Modificar IDF | Editar Objeto <small>PROTOTIPO WEB</small></h2> {% endblock %}
+
+{% block jumbotron %}
+ {% if message %}
+      <div class='alert alert-info'>
+       <span> {{ message }}</span>
+      </div>
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+
+<!-- top tiles -->
+        <div class="row tile_count" >
+            <div class="animated flipInY col-md-4 col-sm-4 tile_stats_count" >
+            <div class="left"></div>
+            <div class="center_title" align="center">
+              <span  class="count_top"> NOMBRE CLASE </span>
+              <div class="count" style="font-size: 27px">{{ args_class }}</div>
+            </div>
+            </div>
+
+                <div class="animated flipInY col-md-4 col-sm-4 tile_stats_count" >
+                <div class="left"></div>
+                <div class="right" align="center">
+                  <span class="count_top"> NOMBRE OBJETO COMERCIAL </span>
+                      {% for a in materials  %}
+                         {% if args_name == a.materials_dsb_name %}
+                            <div class="count" style="font-size: 27px"> {{ a.materials_name }}</div>
+                         {% else %}
+                            <div class="count" style="font-size: 27px"></div>
+                         {% endif %}
+                      {% endfor %}
+                </div>
+                </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+            <div class="left"></div>
+            <div class="right" align="center">
+              <span class="count_top"> NOMBRE OBJETO </span>
+              <div class="count" style="font-size: 27px">{{ args_name }}</div>
+            </div>
+          </div>
+        </div>
+        <!-- /top tiles -->
+<br>
+<br>
+ <form  action="{{ args_id }}"  id="form_edit"  class="form-horizontal" method="POST">
+        {% csrf_token %}
+        {% for a,b in list  %}
+           <tr>
+                 {% if  a  == 'key'  %}
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12"> Clase objeto <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="key" class="form-control col-md-7 col-xs-12"  name="key" value="{{ b }}" required data-parsley-type="alphanum">
+                      </div>
+                    </div>
+                {% else %}
+                    {% if  a  == 'Thickness'  %}
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="Thickness" class="form-control col-md-7 col-xs-12"  min="0,00000001" max="3" step=0.01 name="Thickness" value="{{ b }}" required data-parsley-type="number" type="number">
+                      </div>
+                    </div>
+                {% else %}
+                   {% if  a  == 'Conductivity'  %}
+                      <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="Conductivity" class="form-control col-md-7 col-xs-12" min="0,00000001" max="20" step=0.01 name="Conductivity" value="{{ b }}" required data-parsley-type="number" type="number">
+                      </div>
+                    </div>
+                {% else %}
+                   {% if  a  == 'Density'  %}
+                     <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="Density" class="form-control col-md-7 col-xs-12"  min="0,00000001" max="5000" step=0.01 name="Density" value="{{ b }}" required data-parsley-type="number" type="number">
+                      </div>
+                    </div>
+                {% else %}
+                   {% if  a  == 'Specific_Heat'  %}
+                   <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="Specific_Heat" class="form-control col-md-7 col-xs-12" min="100" max="3000" step=0.01  name="Specific_Heat" value="{{ b }}" required data-parsley-type="number" type="number">
+                      </div>
+                    </div>
+                {% else %}
+                   {% if  a  == 'Thermal_Resistance'  %}
+                   <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="Thermal_Resistance" class="form-control col-md-7 col-xs-12" min="0.001" max="20"  step=0.01 name="Thermal_Resistance" value="{{ b }}" required data-parsley-type="number" type="number">
+                      </div>
+                    </div>
+                {% else %}
+                   {% if  a  == 'Thermal_Absorptance'  %}
+                   <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="Thermal_Absorptance" class="form-control col-md-7 col-xs-12" min="0,00000001" max="0.99999" step=0.01 name="Thermal_Absorptance" value="{{ b }}" data-parsley-validation-threshold="1" data-parsley-trigger="keyup"
+    data-parsley-type="number" type="number">
+                      </div>
+                    </div>
+                {% else %}
+                   {% if  a  == 'Solar_Absorptance'  %}
+                   <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" >{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="Solar_Absorptance" class="form-control col-md-7 col-xs-12" min="0" max="1" step=0.01 name="Solar_Absorptance" value="{{ b }}" required data-parsley-type="number" type="number">
+                      </div>
+                    </div>
+                {% else %}
+                   {% if  a  == 'Visible_Absorptance'  %}
+                   <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="Visible_Absorptance" class="form-control col-md-7 col-xs-12"  name="Visible_Absorptance" value="{{ b }}"  required data-parsley-type="number" min="0"  max="1" step=0.01 type="number">
+                      </div>
+                    </div>
+                {% else %}
+                   {% if  a  == 'Roughness'  %}
+                       <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select id="Roughness"  class="form-control col-md-7 col-xs-12" name="Roughness" required="required">
+                          <option value="{{ b }}" hidden>{{ b }}</option>
+                          <option value="Rough">Rough</option>
+                          <option value="VeryRough">VeryRough</option>
+                          <option value="MediumRough">MediumRough</option>
+                          <option value="MediumSmooth">MediumSmooth</option>
+                          <option value="Smooth">Smooth</option>
+                          <option value="VerySmooth">VerySmooth</option>
+                          <option value=""> Sin Aspereza </option>
+                        </select>
+                        <!--<input id="Roughness" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="Roughness" placeholder="{{ b }}" required="required" type="number   ">-->
+                      </div>
+                    </div>
+                {% else %}
+                       <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="{{ a }}" class="form-control col-md-7 col-xs-12" name="name" value="{{ b }}" required data-parsley-type="alphanum">
+                      </div>
+                    </div>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+        </tr>
+         {% endfor %}
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-md-offset-5">
+                        <button type="submit" class="btn btn-primary">Volver</button>
+                        <button type="submit" class="btn btn-primary" value="Submit">Guardar</button>
+                      </div>
+                    </div>
+ </form>
+
+
+<style>
+   .form-control{
+    opacity: 100;
+    /*border: solid;*/
+    }
+</style>
+<!--<style>-->
+   <!--.count{-->
+       <!--background: #46ff04;-->
+    <!--}-->
+<!--</style>-->
+
+<script type="text/javascript">
+  $('#form_edit').parsley();
+</script>
+
+
+{% endblock %}
+
+{% load static  %}
+
+
+
