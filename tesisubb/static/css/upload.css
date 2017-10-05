@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+/*!
+ * animate.css -http://daneden.me/animate
+ * Version - 3.5.1
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2016 Daniel Eden
+ */
+
+
+.campo1, .campo2 {
+    position: relative;
+    /*width: 50%;*/
+    height: 35px;
+    width:  540px;
+    align-content: center;
+    opacity: 100;
+    /*background-color: chartreuse;*/
+
+    border: 3px;
+     /*border: #08cece;*/
+    border: solid #2A3F54;
+    border-radius: 0 15px 15px 0;
+}
+.campo1:after, .campo2:after {
+    content: attr(data-text);
+    font-size: 18px;
+    position: absolute;
+    top:0px;
+    left: 0;
+    background: #ffffff;
+    padding: 0px 0px;
+    display: block;
+    width: 372px;
+    pointer-events: none;
+    z-index: 20;
+    height: 15px;
+    line-height: 30px;
+    color: #73879C;
+    border-radius: 0 15px 15px 0;
+    font-weight: 200;
+
+}
+.campo1:before, .campo2:before {
+    content: 'Seleccionar';
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    display: inline-block;
+    height: 36px;
+    background: #2A3F54;
+    color: #fff;
+    font-weight: 700;
+    z-index: 61;
+    font-size: 15px;
+    line-height: 35px;
+    padding: 0 30px;
+    text-transform: uppercase;
+    pointer-events: none;
+    border-radius: 0 8px 8px 0;
+}
+
+input {
+    position: absolute;
+    opacity:0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+
+.label1,.label2{
+       opacity: 100;
+       font-size: 17px;
+       z-index: 200;
+       top: 5px;
+       left: 60px;
+}
