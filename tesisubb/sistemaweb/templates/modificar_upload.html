@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block header %}  <h2>Modificar IDF <small>PROTOTIPO WEB</small></h2> {% endblock %}
+
+
+{% load static  %}
+
+
+
+
+{% block content %}
+
+
+{% block jumbotron %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+
+<div >
+    <div>
+      <div class="container">
+        <div class="page-header">
+          <h1>Modificar Archivo IDF</h1>
+        </div>
+               <form  action="" role="form"  enctype="multipart/form-data"  method="POST">
+                   {% csrf_token %}
+                     {% for field in form %}
+
+                    <div class="form-group has-errors text-danger small">
+                    </div>
+                    <div class="form-group" align="center">
+                   {% if field.label == 'Modificar archivo idf' %}
+                    <div class="form-group">
+                    <label class="label1 control-label col-md-4" data-text="Archivo IDF:">Archivo IDF: <span class="required"></span>
+                    </label>
+                    <div name="file-upload-field" class="campo1 col-md-6" data-text="ARCHIVO IDF ...">
+                     {{ field  }}
+                    </div>
+                    </div>
+                   {% endif %}
+                    </div>
+                    {% endfor %}
+             <br>
+             <br>
+             <br>
+             <br>
+             <br>
+             <br>
+
+              <div align="center">
+                <button type="submit" class="btn btn-primary">Modificar Archivo</button>
+              </div>
+            </form>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+{% load static  %}
