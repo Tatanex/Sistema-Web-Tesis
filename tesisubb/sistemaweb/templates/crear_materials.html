@@ -1,0 +1,113 @@
+{% extends 'layout.html' %}
+
+
+{% block header %}  <h2>Crear Material <small>PROTOTIPO WEB</small></h2> {% endblock %}
+
+{% load static  %}
+
+
+
+{% block content %}
+
+{% block jumbotron %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+
+
+
+
+  <div >
+    <div>
+      <div class="container">
+        <div class="page-header">
+          <h1>Agregar Material</h1>
+        </div>
+               <form class="form-horizontal form-label-left" role="form"  enctype="multipart/form-data" action="" method="POST" id="upload-image-form">
+                   {% csrf_token %}
+                   {% for field in form %}
+                    <div class="form-group has-errors text-danger small">
+                        {{field.errors}}
+                    </div>
+                    <div class="form-group has-errors text-danger small">
+                    </div>
+    <div class="form-group">
+                   {% if field.label == 'Materials name' %}
+                    <div class="form-group">
+                    <label class="control-label col-md-4">Nombre Material: <span class="required"></span>
+                    </label>
+                    <div class="col-md-7">
+                     {{  field  }}
+
+                    </div>
+                    </div>
+                   {% endif %}
+
+                   {% if field.label == 'Materials dsb name' %}
+                    <div class="form-group">
+                    <label class="control-label col-md-4">Nombre Material DesignBuilder: <span class="required"></span>
+                    </label>
+                    <div class="col-md-7">
+                     {{  field  }}
+                    </div>
+                    </div>
+                   {% endif %}
+
+
+                   {% if field.label == 'Materials type' %}
+                    <div class="form-group">
+                    <label class="control-label col-md-4">Tipo de Material: <span class="required"></span>
+                    </label>
+                    <div class="col-md-7">
+                     {{  field  }}
+                    </div>
+                    </div>
+                   {% endif %}
+    </div>
+                    {% endfor %}
+              <br>
+              <br>
+              <br>
+              <br>
+              <div align="center" >
+                <button type="submit" class="btn btn-primary" id='upload-btn'>Agregar Material</button>
+              </div>
+            </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+<style>
+   .form-control{
+    opacity: 100;
+    /*border: solid;*/
+    }
+</style>
+
+
+
+
+{% endblock %}
+
+
+{% load static  %}
+
+
