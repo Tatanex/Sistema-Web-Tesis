@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
+{% block header %}  <h2>Comparar IDF's  <small>PROTOTIPO WEB</small></h2> {% endblock %}
 
 
 
@@ -34,7 +35,7 @@
                               <td> {{ comparacion.comparar_id }} </td>
                               <td>{{ comparacion.comparar_archivo_idf1 }}</td>
                               <td>{{ comparacion.comparar_archivo_idf2 }}</td>
-                              <td><a href="diferencia_comparacion/{{ comparacion.comparar_id }}" class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver Comparación </a>
+                              <td><a href="detalle_comparacion/{{ comparacion.comparar_id }}" class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver Comparación </a>
                       </tr>
                      {% endfor %}
                     </tbody>
@@ -43,12 +44,6 @@
         </div>
  </div>
 
- <div id="custom_notifications" class="custom-notifications dsp_none">
-          <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
-          </ul>
-          <div class="clearfix"></div>
-          <div id="notif-group" class="tabbed_notifications"></div>
- </div>
 
 {% endblock %}
 
