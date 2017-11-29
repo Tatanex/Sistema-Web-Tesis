@@ -12,18 +12,41 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
 
 {% block content %}
+
 {% block jumbotron %}
- {% if message %}
-      <div class='alert alert-success'>
-        {{ message }}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+              <div class="alert alert-success alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+          <div class="alert alert-success alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    {% if message %}
+      <div class='alert alert-info'>
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+            <strong> {{ message }}</strong>
+
       </div>
+    {% endif %}
+
 {% endif %}
 {% endblock %}
-<div class="row">
-    <div  id="loading" class="col-md-12 col-sm-12 col-xs-12" style="height: 500px">
+
+        <div class="row" style="height: 500px">
 
         <div id="page-header" class="page-header">
-              <h2>Identificador de simulación: {{ simulacion.simular_id }} </h2>
+              <h2>&nbsp;&nbsp;Identificador de simulación: {{ simulacion.simular_id }} </h2>
         </div>
 
         <form action="simular/{{ simulacion.simular_id }}/submit" method="POST"   enctype="multipart/form-data"  id="submit">
@@ -58,104 +81,117 @@
                 &nbsp;
                 &nbsp;
 
-               <div class="col-md-5 col-md-offset-5">
-                   <button id="boton_submit "type="submit" class="btn btn-info btn-lg" value="Submit">Simular</button>
+               <div id="boton_simular" align="center">
+                   <button id="boton_submit" type="submit" class="btn btn-primary btn-lg" value="submit">Simular</button>
 
                </div>
         </form>
 
-        <!--<div id="loading" >-->
-               <!--</div>-->
-    </div>
-</div>
+
+          <div  id="loader" style="display:none; margin-left:430px">
+
+
+                     <div class="loader">SIMULANDO ...</div>
 
 
 
-
+            </div>
 
 
 <script>
-$('#boton_submit').click(function ()
 
- { $('#page-header').hide();
- { $('#submit').hide();
- { $('#loading').html('<div class="loader">SIMULANDO ...</div>');
+$(document).ready(function(){
+   var myVar;
+ $( "#boton_submit" ).click(function() {
+  	myFunction(this);
+});
 
- return false }}});
+ function myFunction(div) {
+ $("#loader").toggle();
+
+     $("#boton_simular").hide();
+
+//
+//     .css({'height':'900px'});
+ $(div).toggle();
+ }
+});
 </script>
 
 
 
 <style>
-.loader {
-  width: 250px;
-  height: 80px;
-  line-height: 80px;
-  text-align: center;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  font-family: helvetica, arial, sans-serif;
-  text-transform: uppercase;
-  font-weight: 900;
-  color: #08cece;
-  letter-spacing: 0.2em;
-}
-.loader::before, .loader::after {
-  content: "";
-  display: block;
-  width: 15px;
-  height: 15px;
-  background: #08CECE;
-  position: absolute;
-  -webkit-animation: load .7s infinite alternate ease-in-out;
-          animation: load .7s infinite alternate ease-in-out;
-}
-.loader::before {
-  top: 0;
-}
-.loader::after {
-  bottom: 0;
-}
+      .loader {
+      width: 250px;
+      height: 80px;
+      line-height: 80px;
+      text-align: center;
+      position: absolute;
+      /*top: 60%;*/
+      margin-top: 40px;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      font-family: helvetica, arial, sans-serif;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: #337AB7;
+      letter-spacing: 0.2em;
+      background: #ffffff;
+      }
+      .loader::before, .loader::after {
+      content: "";
+      display: block;
+      width: 15px;
+      height: 15px;
+      background: #337AB7;
+      position: absolute;
+      -webkit-animation: load .7s infinite alternate ease-in-out;
+      animation: load .7s infinite alternate ease-in-out;
+      }
+      .loader::before {
+      top: 0;
+      }
+      .loader::after {
+      bottom: 0;
+      }
+      @-webkit-keyframes load {
+      0% {
+      left: 0;
+      height: 30px;
+      width: 15px;
+      }
+      50% {
+      height: 8px;
+      width: 40px;
+      }
+      100% {
+      left: 235px;
+      height: 30px;
+      width: 15px;
+      }
+      }
 
-@-webkit-keyframes load {
-  0% {
-    left: 0;
-    height: 30px;
-    width: 15px;
-  }
-  50% {
-    height: 8px;
-    width: 40px;
-  }
-  100% {
-    left: 235px;
-    height: 30px;
-    width: 15px;
-  }
-}
-
-@keyframes load {
-  0% {
-    left: 0;
-    height: 30px;
-    width: 15px;
-  }
-  50% {
-    height: 8px;
-    width: 40px;
-  }
-  100% {
-    left: 235px;
-    height: 30px;
-    width: 15px;
-  }
-}
-
+      @keyframes load {
+      0% {
+      left: 0;
+      height: 30px;
+      width: 15px;
+      }
+      50% {
+      height: 8px;
+      width: 40px;
+      }
+      100% {
+      left: 235px;
+      height: 30px;
+      width: 15px;
+      }
+      }
 </style>
 
+
+</div>
 
 
 {% endblock %}
