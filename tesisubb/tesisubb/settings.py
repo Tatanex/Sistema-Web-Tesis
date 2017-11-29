@@ -64,6 +64,19 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        'libraries':{
+            'split_custom' : 'sistemaweb.templatetags.split_custom',
+            'split_plus' : 'sistemaweb.templatetags.split_plus',
+            'get_key' : 'sistemaweb.templatetags.get_key',
+            'get_index' : 'sistemaweb.templatetags.get_index',
+            'increment' : 'sistemaweb.templatetags.increment',
+            'get_material' : 'sistemaweb.templatetags.get_material',
+            'get_name' : 'sistemaweb.templatetags.get_name',
+            'query_construction' : 'sistemaweb.templatetags.query_construction',
+            'length_object' : 'sistemaweb.templatetags.length_object',
+            'get_div' : 'sistemaweb.templatetags.get_div',
+
+            }
         },
     },
 ]
