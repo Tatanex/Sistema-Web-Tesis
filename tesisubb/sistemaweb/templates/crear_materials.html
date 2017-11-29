@@ -29,11 +29,11 @@
 
 
 
-  <div >
+  <div class="row" style="height: 500px">
     <div>
       <div class="container">
         <div class="page-header">
-          <h1>Agregar Material</h1>
+          <h1>&nbsp;&nbsp;Agregar Material</h1>
         </div>
                <form class="form-horizontal form-label-left" role="form"  enctype="multipart/form-data" action="" method="POST" id="upload-image-form">
                    {% csrf_token %}
@@ -77,12 +77,10 @@
                    {% endif %}
     </div>
                     {% endfor %}
-              <br>
-              <br>
-              <br>
+
               <br>
               <div align="center" >
-                <button type="submit" class="btn btn-primary" id='upload-btn'>Agregar Material</button>
+                <button type="submit" class="btn btn-primary btn-lg" id='upload-btn'>Agregar Material</button>
               </div>
             </form>
       </div>
