@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block header %}  <h2>Modificar IDF <small>PROTOTIPO WEB</small></h2> {% endblock %}
+
+
+{% load static  %}
+
+
+
+
+{% block content %}
+
+
+{% block jumbotron %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+              <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+         <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+
+{{  doc  }}
+
+{% endblock %}
+
+{% load static  %}
