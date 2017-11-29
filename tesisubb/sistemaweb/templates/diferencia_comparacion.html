@@ -1,54 +1,591 @@
 {% extends 'layout.html' %}
 
 {% load static  %}
-
+{% block content %}
 {% block jumbotron %}
- {% if message %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+              <div class="alert alert-success alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+          <div class="alert alert-success alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    {% if message %}
       <div class='alert alert-info'>
-       <span> {{ message }}</span>
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+            <strong> {{ message }}</strong>
+
       </div>
     {% endif %}
+
+{% endif %}
 {% endblock %}
-{% block content %}
+
+
  <div class="page-header">
           <h1>Diferencias de comparación</h1>
  </div>
 
-<!--{{ comparacion.comparar_archivo_idf1 }}-->
-<!--{{ comparacion.comparar_archivo_idf2 }}-->
 
-{% for keys,values in resultado_alternativa1.items %}
-                  <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel">
-                      <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <h4 class="panel-title">  CLASE   {{ keys }}</h4>
-                      </a>
-                      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body">
-                          <table class="table table-bordered">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Nombre objeto</th>
-                                <th>Ver Material</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            {% for value in values %}
+
+
+
+
+<!--IDF 1-->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="panel-group">
+                <div class="x_title">
+                  <h2> {{ ruta_idf1 }} </h2>
+                  <div class="clearfix"></div>
+                </div>
+
+
+
+                  <div class="x_content panel-group ">
+
+<!--{{ construccion_diff_1 }}-->
+
+
+
+<!--{{ clase_construccion }}-->
+                        <div class="accordion" id="accordiontree" role="tablist">
+                              <div class="panel">
+                              <a class="panel-heading bg-blue" role="tab" id="headingTree" data-toggle="collapse" data-parent="#accordion3" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                <h4 class="panel-title ">  CLASE   {{ tag_construcction }}</h4>
+                              </a>
+                              <div  id="collapseTree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTree">
+                                <div class="panel-body" >
+                                     {% load get_index %}
+                                        {% for c_k, c_v in clase_construccion.items %}
+                                          {% for y in c_v %}
+                            {%for diff_k, diff_v in construccion_diff_2.items %}
+                                {%for value in  diff_v  %}
+                                              {%for diff_key, diff_value in  value.items %}
+                                     {% if  diff_key  in  y.fieldvalues %}
+                                    <table class="table table-bordered table-hover">
+                                    <thead>
+                                      <tr>
+                                          <th colspan="3"> CONSTRUCTION NAME : {{ diff_key }} </th>
+                                      </tr>
+                                    </thead>
+                                        <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Nombre atributo</th>
+                                        <th>Valor Atributo</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                         {% for  v_va  in diff_value %}
                                         <tr>
-                                          <th scope="row">{{ forloop.counter }} </th>
-                                          <td>{{ value }}</td>
-                                          <td><a href="detalle/{{ id_comparacion }}/{{ keys }}/{{ value }}" id="idfs"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                        <th scope="row">{{ forloop.counter }} </th>
+                                        <td> {{v_va.keys|get_index:forloop.counter0}}  </td>
+                                        <td> {{ v_va.values|get_index:forloop.counter0 }} </td>
                                         </tr>
-                            {% endfor %}
-                            </tbody>
-                          </table>
-                        </div>
-                    </div>
-                  </div>
-                  </div>
-{% endfor %}
+                                     {%endfor%}
+                                    </tbody>
+                                  </table>
+                                     {% endif %}
+                                         {%endfor%}
+                                            {%endfor%}
+                                                    {%endfor%}
+                                            {%endfor%}
+                                            {%endfor%}
+                                </div>
+                              </div>
+                          </div>
+                          </div>
+
+                    {% for keys,values in diccionario_idf1.items %}
+                    {% for k_diferencias,v_diferencias in resultado_alternativa_idf1.items %}
+                      {% if keys == "MATERIAL" and k_diferencias == "MATERIAL" %}
+
+                          <div class="accordion" id="accordion" role="tablist">
+                            <div class="panel">
+                              <a class="panel-heading bg-blue" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h4 class="panel-title panel-primary ">  CLASE   {{ keys }}</h4>
+                              </a>
+                              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                        <table class="table table-bordered table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Nombre objeto</th>
+                                        <th>Ver Material</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for valor in values %}
+                                       {% if valor.Name in v_diferencias %}
+                                           {% load split_custom %}
+                                           {% load get_key %}
+                                              {% if valor.Name|split %}
+                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                                 {% with name=valor.Name|split%}
+                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+                                                    {% if name in diccionario_materiales.keys %}
+                                                       <tr class="bg-success has-success">
+                                                          <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                                           {% if diccionario_materiales|get_key:name %}
+                                                              <td>{{ diccionario_materiales|get_key:name }}</td>
+                                                           {% endif %}
+                                                          <td><a href="/detalle/idf_1/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a>
+                                                         </td>
+                                                       </tr>
+                                                    {% else %}
+                                                       <tr class="bg-success has-success">
+                                                           <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                                           <!--<td>{{ name }}</td>-->
+                                                           <td>{{valor.Name}}</td>
+                                                           <td><a href="/detalle/idf_1/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% endif %}
+                                                 {% endwith %}
+                                              {% endif %}
+                                       {% else %}
+                                               {% load split_custom %}
+                                              {% if valor.Name|split %}
+                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                                 {% with name=valor.Name|split%}
+                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+                                                    {% if name in diccionario_materiales.keys %}
+                                                       <tr>
+                                                          <th scope="row">{{ forloop.counter }}</th>
+                                                          {% if diccionario_materiales|get_key:name %}
+                                                              <td>{{ diccionario_materiales|get_key:name }}</td>
+                                                          {% endif %}
+                                                          <td><a href="/detalle/idf_1/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% else %}
+                                                       <tr>
+                                                           <th scope="row">{{ forloop.counter }}</th>
+                                                           <!--<td>{{ name }}</td>-->
+                                                           <td>{{valor.Name}}</td>
+                                                           <td><a href="/detalle/idf_1/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% endif %}
+                                                 {% endwith %}
+                                              {% endif %}
+                                       {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                          </div>
+                          </div>
+                      {% else  %}
+                         {% if keys == "MATERIAL:NOMASS" and  k_diferencias == "MATERIAL:NOMASS" %}
+                         <div class="accordion" id="accordion2" role="tablist">
+                              <div class="panel">
+                              <a class="panel-heading bg-blue" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                <h4 class="panel-title ">  CLASE   {{ keys }}</h4>
+                              </a>
+                              <div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body" >
+                                   <table class="table table-bordered table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th>Clase</th>
+                                        <th>Nombre objeto</th>
+                                        <th>Ver Material</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for valor in values %}
+                                       {% if valor.Name in v_diferencias %}
+                                    <!--{{valor.Name}}-->
+                                    <!--{{v_diferencias}}-->
+                                           {% load split_custom %}
+                                           {% load get_key %}
+                                              <!--{% if valor.Name|split %}-->
+                                                <!--{{valor.Name|split }}-->
+                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                                 <!--{% with name=valor.Name|split%}-->
+                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+
+                                                    {% if valor.Name in diccionario_materiales.keys %}
+                                                       <tr class="bg-success has-success">
+                                                          <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                                           {% if diccionario_materiales|get_key:valor.Name %}
+                                                              <td>{{ diccionario_materiales|get_key:valor.Name }}</td>
+                                                           {% endif %}
+                                                          <td><a href="/detalle/idf_1/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% else %}
+                                                       <tr class="bg-success has-success">
+                                                           <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                                           <!--<td>{{ name }}</td>-->
+                                                           <td>{{valor.Name}}</td>
+                                                           <td><a href="/detalle/idf_1/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% endif %}
+                                                 <!--{% endwith %}-->
+                                              <!--{% endif %}-->
+                                       {% else %}
+                                               {% load split_custom %}
+                                              <!--{% if valor.Name|split %}-->
+                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                                 <!--{% with name=valor.Name|split%}-->
+                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+                                                    {% if valor.Name in diccionario_materiales.keys %}
+                                                       <tr>
+                                                          <th scope="row">{{ forloop.counter }} </th>
+                                                          {% if diccionario_materiales|get_key:valor.Name  %}
+                                                              <td>{{ diccionario_materiales|get_key:valor.Name  }}</td>
+                                                          {% endif %}
+                                                          <td><a href="/detalle/idf_1/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% else %}
+                                                       <tr>
+                                                           <th scope="row">{{ forloop.counter }}</th>
+                                                           <!--<td>{{ name }}</td>-->
+                                                           <td>{{valor.Name}}</td>
+                                                           <td><a href="/detalle/idf_1/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% endif %}
+                                                 <!--{% endwith %}-->
+                                              <!--{% endif %}-->
+                                       {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                          </div>
+                          </div>
+
+
+
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+
+
+
+
+                    <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- IDF #2-->
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="panel-group">
+                <div class="x_title">
+                  <h2> {{ ruta_idf2 }} </h2>
+                  <div class="clearfix"></div>
+                </div>
+                  <div class="x_content panel-group ">
+
+                            <div class="accordion" id="accordionnine" role="tablist">
+                              <div class="panel">
+                              <a class="panel-heading bg-blue" role="tab" id="headingNine" data-toggle="collapse" data-parent="#accordion9" href="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                                <h4 class="panel-title ">  CLASE   {{ tag_construcction }}</h4>
+                              </a>
+                              <div  id="collapseNine" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingNine">
+                                <div class="panel-body" >
+                                     {% load get_index %}
+                                        {% for c_k, c_v in clase_construccion.items %}
+                                          {% for y in c_v %}
+                            {%for diff_k, diff_v in construccion_diff_1.items %}
+                                {%for value in  diff_v  %}
+                                              {%for diff_key, diff_value in  value.items %}
+                                     {% if  diff_key  in  y.fieldvalues %}
+                                    <table class="table table-bordered table-hover">
+                                    <thead>
+                                      <tr>
+                                          <th colspan="3"> CONSTRUCTION NAME : {{ diff_key }} </th>
+                                      </tr>
+                                    </thead>
+                                        <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Nombre atributo</th>
+                                        <th>Valor Atributo</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                         {% for  v_va  in diff_value %}
+                                        <tr>
+                                        <th scope="row">{{ forloop.counter }} </th>
+                                        <td> {{v_va.keys|get_index:forloop.counter0}}  </td>
+                                        <td> {{ v_va.values|get_index:forloop.counter0 }} </td>
+                                        </tr>
+                                     {%endfor%}
+                                    </tbody>
+                                  </table>
+                                     {% endif %}
+                                         {%endfor%}
+                                            {%endfor%}
+                                                    {%endfor%}
+                                            {%endfor%}
+                                            {%endfor%}
+                                </div>
+                              </div>
+                          </div>
+                          </div>
+
+
+                    {% for keys,values in diccionario_idf2.items %}
+                    {% for k_diferencias,v_diferencias in resultado_alternativa_idf2.items %}
+                      {% if keys == "MATERIAL" and k_diferencias == "MATERIAL" %}
+                          <div class="accordion" id="accordion10" role="tablist">
+                            <div class="panel" >
+                              <a class="panel-heading bg-blue" role="tab" id="headingTen" data-toggle="collapse" data-parent="#accordion10" href="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                                <h4 class="panel-title panel-primary ">  CLASE   {{ keys }}</h4>
+                              </a>
+                              <div id="collapseTen" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTen">
+                                <div class="panel-body">
+                                     <table class="table table-bordered table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Nombre objeto</th>
+                                        <th>Ver Material</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for valor in values %}
+                                       {% if valor.Name in v_diferencias %}
+                                           {% load split_custom %}
+                                           {% load get_key %}
+                                              {% if valor.Name|split %}
+                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                                 {% with name=valor.Name|split%}
+                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+                                                    {% if name in diccionario_materiales.keys %}
+                                                       <tr class="bg-success has-success">
+                                                          <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                                           {% if diccionario_materiales|get_key:name %}
+                                                              <td>{{ diccionario_materiales|get_key:name }}</td>
+                                                           {% endif %}
+                                                          <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% else %}
+                                                       <tr class="bg-success has-success">
+                                                           <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                                           <!--<td>{{ name }}</td>-->
+                                                           <td>{{valor.Name}}</td>
+                                                           <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% endif %}
+                                                 {% endwith %}
+                                              {% endif %}
+                                       {% else %}
+                                               {% load split_custom %}
+                                              {% if valor.Name|split %}
+                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                                 {% with name=valor.Name|split%}
+                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+                                                    {% if name in diccionario_materiales.keys %}
+                                                       <tr>
+                                                          <th scope="row">{{ forloop.counter }}</th>
+                                                          {% if diccionario_materiales|get_key:name %}
+                                                              <td>{{ diccionario_materiales|get_key:name }}</td>
+                                                          {% endif %}
+                                                          <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% else %}
+                                                       <tr>
+                                                           <th scope="row">{{ forloop.counter }}</th>
+                                                           <!--<td>{{ name }}</td>-->
+                                                           <td>{{valor.Name}}</td>
+                                                           <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% endif %}
+                                                 {% endwith %}
+                                              {% endif %}
+                                       {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                          </div>
+                          </div>
+                      {% else  %}
+                           {% if keys == "MATERIAL:NOMASS" and  k_diferencias == "MATERIAL:NOMASS"  %}
+                          <div class="accordion" id="accordion11" role="tablist">
+                            <div class="panel">
+                              <a class="panel-heading bg-blue" role="tab" id="headingEleven" data-toggle="collapse" data-parent="#accordion11" href="#collapseEleven" aria-expanded="true" aria-controls="collapseEleven">
+                                <h4 class="panel-title ">  CLASE   {{ keys }}</h4>
+                              </a>
+                              <div  id="collapseEleven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingEleven">
+                                <div class="panel-body" >
+                                          <table class="table table-bordered table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Nombre objeto</th>
+                                        <th>Ver Material</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for valor in values %}
+                                       {% if valor.Name in v_diferencias %}
+                                    <!--{{valor.Name}}-->
+                                    <!--{{v_diferencias}}-->
+                                           {% load split_custom %}
+                                           {% load get_key %}
+                                              <!--{% if valor.Name|split %}-->
+                                                <!--{{valor.Name|split }}-->
+                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                                 <!--{% with name=valor.Name|split%}-->
+                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+
+                                                    {% if valor.Name in diccionario_materiales.keys %}
+                                                       <tr class="bg-success has-success">
+                                                          <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                                           {% if diccionario_materiales|get_key:valor.Name %}
+                                                              <td>{{ diccionario_materiales|get_key:valor.Name }}</td>
+                                                           {% endif %}
+                                                          <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% else %}
+                                                       <tr class="bg-success has-success">
+                                                           <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                                           <!--<td>{{ name }}</td>-->
+                                                           <td>{{valor.Name}}</td>
+                                                           <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% endif %}
+                                                 <!--{% endwith %}-->
+                                              <!--{% endif %}-->
+                                       {% else %}
+                                               {% load split_custom %}
+                                              <!--{% if valor.Name|split %}-->
+                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                                 <!--{% with name=valor.Name|split%}-->
+                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+                                                    {% if valor.Name in diccionario_materiales.keys %}
+                                                       <tr>
+                                                          <th scope="row">{{ forloop.counter }} </th>
+                                                          {% if diccionario_materiales|get_key:valor.Name  %}
+                                                              <td>{{ diccionario_materiales|get_key:valor.Name  }}</td>
+                                                          {% endif %}
+                                                          <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% else %}
+                                                       <tr>
+                                                           <th scope="row">{{ forloop.counter }}</th>
+                                                           <!--<td>{{ name }}</td>-->
+                                                           <td>{{valor.Name}}</td>
+                                                           <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                                       </tr>
+                                                    {% endif %}
+                                                 <!--{% endwith %}-->
+                                              <!--{% endif %}-->
+                                       {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                          </div>
+                          </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+
+
+
+<style>
+.accordion .panel:hover {
+  background: #ffffff;
+}
+.accordion .panel-heading {
+  background: #ffffff;
+  padding: 13px;
+  width: 100%;
+  display: block;
+}
+
+.panel-heading a {
+  display: block;
+  padding: 10px 15px;
+}
+
+ .panel-heading a:after {
+  content: "";
+  position: relative;
+  top: 1px;
+  display: inline-block;
+
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  float: right;
+  transition: transform .25s linear;
+  -webkit-transition: -webkit-transform .25s linear;
+}
+
+ .panel-heading a[aria-expanded="true"] {
+  background-color: #eee;
+}
+
+  .panel-heading a[aria-expanded="true"]:after {
+  content: "\2212";
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.panel-heading a[aria-expanded="false"]:after {
+  content: "\002b";
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+
+
+
+</style>
 {% endblock %}
-
-
 {% load static  %}
