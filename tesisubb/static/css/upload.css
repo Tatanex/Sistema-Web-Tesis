@@ -77,8 +77,6 @@ input {
     width: 100%;
 }
 
-
-
 .label1,.label2{
        opacity: 100;
        font-size: 17px;
@@ -86,3 +84,7 @@ input {
        top: 5px;
        left: 60px;
 }
+
+
+
+
