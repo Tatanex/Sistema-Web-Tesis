@@ -2,10 +2,7 @@
 {% load static  %}
 
 
-
-
-
-
+{% block header %}  <h2> Detalle objeto <small>PROTOTIPO WEB</small></h2> {% endblock %}
 
 {% block jumbotron %}
  {% if message %}
@@ -16,33 +13,25 @@
 {% endblock %}
 {% block content %}
 
-
-
-<!-- top tiles -->
-      <div class="row tile_count" align="center" >
-            <div class="animated flipInY  tile_stats_count" >
+<div class="row tile_count" >
+            <div class="animated flipInY col-md-4 col-sm-4 tile_stats_count" >
             <div class="left"></div>
             <div class="center_title" align="center">
               <span  class="count_top"> NOMBRE CLASE </span>
               <div class="count" style="font-size: 27px">{{ args_class }}</div>
             </div>
             </div>
-
-                <div class="animated flipInY tile_stats_count" >
+           {% load get_material %}
+                <div class="animated flipInY col-md-4 col-sm-4 tile_stats_count" >
                 <div class="left"></div>
                 <div class="right" align="center">
                   <span class="count_top"> NOMBRE OBJETO COMERCIAL </span>
-                      {% for a in materials  %}
-                         {% if args_name == a.materials_dsb_name %}
-                            <div class="count" style="font-size: 27px"> {{ a.materials_name }}</div>
-                         {% else %}
-                            <div class="count" style="font-size: 27px"></div>
-                         {% endif %}
-                      {% endfor %}
+                     <div class="count" style="font-size: 27px"> {{ args_name|get_material }}</div>
+
                 </div>
                 </div>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <div class="animated flipInY col-md-3 col-sm-3  tile_stats_count">
+          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
             <div class="left"></div>
             <div class="right" align="center">
               <span class="count_top"> NOMBRE OBJETO </span>
@@ -51,7 +40,6 @@
           </div>
         </div>
         <!-- /top tiles -->
-
 
 
 <table class="table table-bordered" align="center">
@@ -64,7 +52,7 @@
          </thead>
          <tbody>
 
-
+         {% load get_name %}
          {% for a,b in list   %}
                <tr>
                  {% if  a  == 'key'  %}
@@ -73,26 +61,26 @@
                    <td> {{ b }} </td>
                 {% else %}
                     {% if  a  == 'Thickness'  %}
-                   <td> {{ a }} </td>
+                   <td> {{ a|get_name }} </td>
                    <td> m </td>
                    <td> {{ b }} </td>
                 {% else %}
                    {% if  a  == 'Conductivity'  %}
-                   <td> {{ a }} </td>
+                   <td> {{ a|get_name }} </td>
                    <td> W/m-k </td>
                    <td> {{ b }} </td>
                 {% else %}
                    {% if  a  == 'Density'  %}
-                   <td> {{ a }} </td>
+                   <td> {{ a|get_name }} </td>
                    <td> kg/m3 </td>
                    <td> {{ b }} </td>
                 {% else %}
                    {% if  a  == 'Specific_Heat'  %}
-                   <td> {{ a }} </td>
+                   <td> {{ a|get_name }} </td>
                    <td> J/kg-K </td>
                    <td> {{ b }} </td>
                 {% else %}
-                   <td> {{ a }} </td>
+                   <td> {{ a|get_name }} </td>
                    <td>  </td>
                    <td> {{ b }} </td>
 
@@ -101,15 +89,10 @@
                 {% endif %}
                 {% endif %}
                 {% endif %}
-
-
                </tr>
          {% endfor %}
          </tbody>
  </table>
-
-
-
 
 
 {% endblock %}
