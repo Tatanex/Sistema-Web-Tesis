@@ -1,0 +1,251 @@
+{% extends 'layout.html' %}
+{% block header %}  <h2>Combinar Mejoras  <small>PROTOTIPO WEB</small></h2> {% endblock %}
+{% load static  %}
+{% block content %}
+
+<div class="row" style="height: 500px">
+
+
+{{ llave }}
+{% block jumbotron %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+              <div name="div_error" class="alert alert-success alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+          <div class="alert alert-success alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+  <div id="div_error" class="alert alert-danger alert-dismissible fade in" role="alert" hidden="hidden">
+
+  </div>
+
+{% endblock %}
+
+               <div class="page-header">
+                    <h1>&nbsp;Combinar alternativas</h1>
+               </div>
+
+
+              <div class="x_panel">
+                <div class="x_content">
+                  <div class="" role="tabpanel" data-example-id="togglable-tabs" align="center">
+                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                      <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Mejora #1</a>
+                      </li>
+                      <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Mejora #2</a>
+                      </li>
+                      <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Mejora #3</a>
+                      </li>
+                      <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab4" data-toggle="tab" aria-expanded="false">Mejora #4</a>
+                      </li>
+                      <li role="presentation" class=""><a href="#tab_content5" role="tab" id="profile-tab5" data-toggle="tab" aria-expanded="false">Mejora #5</a>
+                      </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content" align="center">
+                      <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                         <br>
+                        <h2>ALTERNATIVA #1   |  Recambio Cielo 100 mm con terciado 9 mm</h2>
+                          <!--<p>  'MATERIAL': ['3_4_14', '3_5_4171']</p>-->
+                          <!--<p>   'MATERIAL:NOMASS': ['3_RVAL_3', '4_RVAL_3']</p>-->
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                          <br>
+                        <h2>ALTERNATIVA #2   |  Revestimiento Interior en Muros Secos</h2>
+                          <!--<p>  'MATERIAL': ['3_4_14', '3_5_4171']</p>-->
+                          <!--<p>   'MATERIAL:NOMASS': ['3_RVAL_3', '4_RVAL_3']</p>-->
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                       <br>
+                        <h2>ALTERNATIVA #3   |  Revestimiento Interior en muros Humedos</h2>
+                          <!--<p>  'MATERIAL': ['3_4_14', '3_5_4171']</p>-->
+                          <!--<p>   'MATERIAL:NOMASS': ['3_RVAL_3', '4_RVAL_3']</p>-->
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
+                         <br>
+                        <h2>ALTERNATIVA #4   |  Cambio de ventanas a DVH</h2>
+                          <!--<p>  'MATERIAL': ['3_4_14', '3_5_4171']</p>-->
+                          <!--<p>   'MATERIAL:NOMASS': ['3_RVAL_3', '4_RVAL_3']</p>-->
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="tab_content5" aria-labelledby="profile-tab">
+                         <br>
+                        <h2>ALTERNATIVA #5   |  Implementación de extractores</h2>
+                          <!--<p>  'MATERIAL': ['3_4_14', '3_5_4171']</p>-->
+                          <!--<p>   'MATERIAL:NOMASS': ['3_RVAL_3', '4_RVAL_3']</p>-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <br>
+              <form class="form-group" method="POST"  action="" enctype="multipart/form-data"  id="submit"   onsubmit = "validate(event, this);">
+                      {% csrf_token %}
+                      <div class="col-md-12" align="center">
+                        <div class="checkbox-inline">
+                          <label>
+                            <input type="checkbox" class="flat" value="1" name="alternativa">  Alternativa 1
+                          </label>
+                        </div>
+                        <div class="checkbox-inline">
+                          <label>
+                            <input type="checkbox" class="flat" value="2" name="alternativa">  Alternativa 2
+                          </label>
+                        </div>
+                        <div class="checkbox-inline">
+                          <label>
+                            <input type="checkbox" class="flat" value="3" name="alternativa">  Alternativa 3
+                          </label>
+                        </div>
+                        <div class="checkbox-inline">
+                          <label>
+                            <input type="checkbox" class="flat" value="4" name="alternativa">  Alternativa 4
+                          </label>
+                        </div>
+                          <div class="checkbox-inline">
+                          <label>
+                            <input type="checkbox" class="flat" value="5" name="alternativa">  Alternativa 5
+                          </label>
+                        </div>
+                      </div>
+                        <br>
+               <br>
+               <br>
+                  <div class="col-md-5 col-md-offset-5">
+                   <button id="boton_submit" type="submit"  class="btn btn-primary btn-lg" value="submit">Combinar Alternativas</button>
+                  </div>
+              </form>
+
+            <div  id="loader" style="display:none; margin-left:430px">
+
+
+                     <div class="loader">COMBINANDO ...</div>
+
+
+
+            </div>
+
+
+<script>
+
+$(document).ready(function(){
+   var myVar;
+ $( "#boton_submit" ).click(function() {
+        $('form').submit(function(e){
+    // si la cantidad de checkboxes "chequeados" es cero,
+    // entonces se evita que se envíe el formulario y se
+    // muestra una alerta al usuario
+    if ($('input[type=checkbox]:checked').length === 0) {
+        e.preventDefault();
+        $(div_error).show();
+        $(div_error).html( "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span> </button><strong style='color:#fafafa'>SELECCIONE AL MENOS UNA ALTERNATIVA.</strong>" );
+    }else{
+
+          	myFunction(this);
+    }
+});
+
+
+
+
+});
+
+ function myFunction(div) {
+ $("#loader").toggle();
+
+     $("#submit").hide();
+
+//
+//     .css({'height':'900px'});
+ $(div).toggle();
+ }
+});
+</script>
+
+
+
+<style>
+      .loader {
+      width: 250px;
+      height: 80px;
+      line-height: 80px;
+      text-align: center;
+      position: absolute;
+      /*top: 60%;*/
+      margin-top: 40px;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      font-family: helvetica, arial, sans-serif;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: #337AB7;
+      letter-spacing: 0.2em;
+      background: #ffffff;
+      }
+      .loader::before, .loader::after {
+      content: "";
+      display: block;
+      width: 15px;
+      height: 15px;
+      background: #337AB7;
+      position: absolute;
+      -webkit-animation: load .7s infinite alternate ease-in-out;
+      animation: load .7s infinite alternate ease-in-out;
+      }
+      .loader::before {
+      top: 0;
+      }
+      .loader::after {
+      bottom: 0;
+      }
+      @-webkit-keyframes load {
+      0% {
+      left: 0;
+      height: 30px;
+      width: 15px;
+      }
+      50% {
+      height: 8px;
+      width: 40px;
+      }
+      100% {
+      left: 235px;
+      height: 30px;
+      width: 15px;
+      }
+      }
+
+      @keyframes load {
+      0% {
+      left: 0;
+      height: 30px;
+      width: 15px;
+      }
+      50% {
+      height: 8px;
+      width: 40px;
+      }
+      100% {
+      left: 235px;
+      height: 30px;
+      width: 15px;
+      }
+      }
+</style>
+
+</div>
+{% endblock %}
+{% load static  %}
