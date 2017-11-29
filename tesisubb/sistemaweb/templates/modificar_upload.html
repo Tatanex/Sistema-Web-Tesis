@@ -15,13 +15,17 @@
 {% if form.errors %}
     {% for field in form %}
         {% for error in field.errors %}
-            <div class="alert alert-danger">
+              <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
                 <strong>{{ error|escape }}</strong>
             </div>
         {% endfor %}
     {% endfor %}
     {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
+         <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
             <strong>{{ error|escape }}</strong>
         </div>
     {% endfor %}
@@ -37,7 +41,6 @@
                <form  action="" role="form"  enctype="multipart/form-data"  method="POST">
                    {% csrf_token %}
                      {% for field in form %}
-
                     <div class="form-group has-errors text-danger small">
                     </div>
                     <div class="form-group" align="center">
@@ -56,11 +59,9 @@
              <br>
              <br>
              <br>
-             <br>
-             <br>
 
               <div align="center">
-                <button type="submit" class="btn btn-primary">Modificar Archivo</button>
+                <button type="submit" class="btn btn-primary btn-lg">Modificar Archivo</button>
               </div>
             </form>
       </div>
