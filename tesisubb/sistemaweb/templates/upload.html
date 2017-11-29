@@ -21,10 +21,10 @@
 {% endif %}
 {% endblock %}
 
-    <div >
+    <div class="row" style="height: 500px">
       <div class="container">
         <div class="page-header">
-          <h1>Cargar Archivo IDF</h1>
+          <h1>&nbsp;&nbsp;Cargar Archivo IDF</h1>
         </div>
                <form  role="form"  enctype="multipart/form-data" action="" method="POST" name="form">
                    {% csrf_token %}
@@ -38,7 +38,7 @@
                     <div class="form-group">
                     <label class="label1 control-label col-md-4" data-text="Archivo IDF:">Archivo Clima: <span class="required"></span>
                     </label>
-                    <div name="file-upload-field" class="campo1 col-md-6" data-text="ARCHIVO EPW ...">
+                    <div class="campo1 col-md-6 " data-text="ARCHIVO EPW ...">
                      {{ field  }}
                     </div>
                     </div>
@@ -48,7 +48,7 @@
                     <div class="form-group">
                     <label class="label2 control-label col-md-4" data-text="Archivo IDF:">Archivo IDF: <span class="required"></span>
                     </label>
-                    <div class="campo2 col-md-6  " data-text="ARCHIVO IDF ...">
+                    <div class="campo2 col-md-6 " data-text="ARCHIVO IDF ...">
                      {{  field  }}
                     </div>
                     </div>
@@ -60,19 +60,9 @@
               <br>
               <br>
               <div align="center">
-                <button type="submit" class="btn btn-primary" id='upload-btn'>Cargar Archivos</button>
+                <button type="submit" class="btn btn-primary btn-lg" id='upload-btn'>Cargar Archivos</button>
               </div>
             </form>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
 {% endblock %}
