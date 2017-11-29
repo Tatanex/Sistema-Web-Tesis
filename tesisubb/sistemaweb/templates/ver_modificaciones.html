@@ -33,8 +33,13 @@
                       <tr>
                               <td> {{ modificacion.modificar_id }} </td>
                               <td>{{ modificacion.modificar_archivo_idf }}</td>
-                              <td><a href="modificar/{{ modificacion.modificar_id  }}" class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Modificar </a></td>
+                              <td><a href="modificar/{{ modificacion.modificar_id  }}" class="btn btn-primary btn-xs"> <i class="fa fa-edit" ></i> &nbsp; Modificar </a>
+                                  <a href ="/media/{{  modificacion.modificar_archivo_idf }}"  class="btn btn-success btn-xs"> <i class="fa fa-download" ></i> &nbsp; Descargar IDF </a>
+                              </td>
                       </tr>
+
+
+
                      {% endfor %}
                     </tbody>
                  </table>
