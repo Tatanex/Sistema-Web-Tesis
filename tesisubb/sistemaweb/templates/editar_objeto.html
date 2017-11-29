@@ -18,7 +18,7 @@
             <div class="left"></div>
             <div class="center_title" align="center">
               <span  class="count_top"> NOMBRE CLASE </span>
-              <div class="count" style="font-size: 27px">{{ args_class }}</div>
+              <div class="count" style="font-size: 25px">{{ args_class }}</div>
             </div>
             </div>
 
@@ -26,13 +26,80 @@
                 <div class="left"></div>
                 <div class="right" align="center">
                   <span class="count_top"> NOMBRE OBJETO COMERCIAL </span>
-                      {% for a in materials  %}
-                         {% if args_name == a.materials_dsb_name %}
-                            <div class="count" style="font-size: 27px"> {{ a.materials_name }}</div>
-                         {% else %}
-                            <div class="count" style="font-size: 27px"></div>
-                         {% endif %}
-                      {% endfor %}
+                      <!--{% for a in materials  %}-->
+                         <!--{% if args_name == a.materials_dsb_name %}-->
+                            <!--<div class="count" style="font-size: 27px"> {{ a.materials_name }}</div>-->
+                         <!--{% else %}-->
+                            <!--<div class="count" style="font-size: 27px"></div>-->
+                         <!--{% endif %}-->
+                      <!--{% endfor %}-->
+
+
+                         {% if args_class == 'WINDOWMATERIAL_GAS' %}
+                        {% load split_custom %}
+                                  {% load get_key %}
+
+                                  {% if args_name in diccionario_windows_material.keys %}
+                        <div class="count" style="font-size: 27px"> {{ diccionario_windows_material|get_key:args_name }}</div>
+                                      <!--<td>{{ diccionario_windows_material|get_key:args_name }}</td>-->
+
+                                  {% else %}
+                                       <td>No asignado</td>
+                         {% endif%}
+
+                    {% else %}
+
+                   {% if args_class == 'WINDOWMATERIAL_GLAZING' %}
+                        {% load split_custom %}
+                                  {% load get_key %}
+
+                                  {% if args_name in diccionario_windows_material.keys %}
+                        <div class="count" style="font-size: 27px"> {{ diccionario_windows_material|get_key:args_name }}</div>
+                                      <!--<td>{{ diccionario_windows_material|get_key:args_name }}</td>-->
+
+                                  {% else %}
+                                       <td>No asignado</td>
+                         {% endif%}
+
+                    {% else %}
+
+
+
+                   {% if args_class == 'MATERIAL_NOMASS' %}
+                        {% load split_custom %}
+                                  {% load get_key %}
+
+                                  {% if args_name in diccionario_materiales.keys %}
+                        <div class="count" style="font-size: 27px"> {{ diccionario_materiales|get_key:args_name }}</div>
+                                      <!--<td>{{ diccionario_windows_material|get_key:args_name }}</td>-->
+
+                                  {% else %}
+                                       <td>No asignado</td>
+                         {% endif%}
+
+                    {% else %}
+
+                    {% if args_class == 'MATERIAL' %}
+                        {% load split_custom %}
+                                  {% load get_key %}
+                              {% if args_name|split %}
+                              {% with name_comercial=args_name|split%}
+                              {% if name_comercial in diccionario_materiales.keys %}
+                               {% if diccionario_materiales|get_key:name_comercial %}
+
+                     <div class="count" style="font-size: 27px"> {{ diccionario_materiales|get_key:name_comercial }}</div>
+                               {% endif %}
+                              {% else %}
+                                   <td>No asignado</td>
+                              {% endif%}
+                              {% endwith %}
+                              {% endif%}
+
+                   {% endif %}
+                   {% endif %}
+                   {% endif %}
+                   {% endif %}
+
                 </div>
                 </div>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -50,66 +117,67 @@
  <form  action="{{ args_id }}"  id="form_edit"  class="form-horizontal" method="POST">
         {% csrf_token %}
         {% for a,b in list  %}
+        {% load get_name %}
            <tr>
                  {% if  a  == 'key'  %}
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12"> Clase objeto <span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12"> Clase objeto <span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
                         <input id="key" class="form-control col-md-7 col-xs-12"  name="key" value="{{ b }}" required data-parsley-type="alphanum">
                       </div>
                     </div>
                 {% else %}
                     {% if  a  == 'Thickness'  %}
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ a|get_name }}<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
                         <input id="Thickness" class="form-control col-md-7 col-xs-12"  min="0,00000001" max="3" step=0.01 name="Thickness" value="{{ b }}" required data-parsley-type="number" type="number">
                       </div>
                     </div>
                 {% else %}
                    {% if  a  == 'Conductivity'  %}
                       <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ a|get_name }}<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="Conductivity" class="form-control col-md-7 col-xs-12" min="0,00000001" max="20" step=0.01 name="Conductivity" value="{{ b }}" required data-parsley-type="number" type="number">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
+                        <input id="Conductivity" class="form-control col-md-7 col-xs-12" min="0,00000001" max="1000" step=0.01 name="Conductivity" value="{{ b }}" required data-parsley-type="number" type="number">
                       </div>
                     </div>
                 {% else %}
                    {% if  a  == 'Density'  %}
                      <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ a|get_name }}<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="Density" class="form-control col-md-7 col-xs-12"  min="0,00000001" max="5000" step=0.01 name="Density" value="{{ b }}" required data-parsley-type="number" type="number">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
+                        <input id="Density" class="form-control col-md-7 col-xs-12"  min="0,00000001" max="10000" step=0.01 name="Density" value="{{ b }}" required data-parsley-type="number" type="number">
                       </div>
                     </div>
                 {% else %}
                    {% if  a  == 'Specific_Heat'  %}
                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ a|get_name }}<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
                         <input id="Specific_Heat" class="form-control col-md-7 col-xs-12" min="100" max="3000" step=0.01  name="Specific_Heat" value="{{ b }}" required data-parsley-type="number" type="number">
                       </div>
                     </div>
                 {% else %}
                    {% if  a  == 'Thermal_Resistance'  %}
                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ a|get_name }}<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="Thermal_Resistance" class="form-control col-md-7 col-xs-12" min="0.001" max="20"  step=0.01 name="Thermal_Resistance" value="{{ b }}" required data-parsley-type="number" type="number">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
+                        <input id="Thermal_Resistance" class="form-control col-md-7 col-xs-12" min="0.0001" max="20"  step=0.0001 name="Thermal_Resistance" value="{{ b }}" required data-parsley-type="number" type="number">
                       </div>
                     </div>
                 {% else %}
                    {% if  a  == 'Thermal_Absorptance'  %}
                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ a|get_name }}<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
                         <input id="Thermal_Absorptance" class="form-control col-md-7 col-xs-12" min="0,00000001" max="0.99999" step=0.01 name="Thermal_Absorptance" value="{{ b }}" data-parsley-validation-threshold="1" data-parsley-trigger="keyup"
     data-parsley-type="number" type="number">
                       </div>
@@ -117,27 +185,27 @@
                 {% else %}
                    {% if  a  == 'Solar_Absorptance'  %}
                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" >{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12" >{{ a|get_name }}<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
                         <input id="Solar_Absorptance" class="form-control col-md-7 col-xs-12" min="0" max="1" step=0.01 name="Solar_Absorptance" value="{{ b }}" required data-parsley-type="number" type="number">
                       </div>
                     </div>
                 {% else %}
                    {% if  a  == 'Visible_Absorptance'  %}
                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ a|get_name }}<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
                         <input id="Visible_Absorptance" class="form-control col-md-7 col-xs-12"  name="Visible_Absorptance" value="{{ b }}"  required data-parsley-type="number" min="0"  max="1" step=0.01 type="number">
                       </div>
                     </div>
                 {% else %}
                    {% if  a  == 'Roughness'  %}
                        <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ a|get_name }}<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
                           <select id="Roughness"  class="form-control col-md-7 col-xs-12" name="Roughness" required="required">
                           <option value="{{ b }}" hidden>{{ b }}</option>
                           <option value="Rough">Rough</option>
@@ -153,10 +221,10 @@
                     </div>
                 {% else %}
                        <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ a }}<span class="required">*</span>
+                      <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ a|get_name }}
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="{{ a }}" class="form-control col-md-7 col-xs-12" name="name" value="{{ b }}" required data-parsley-type="alphanum">
+                      <div class="col-md-7 col-sm-6 col-xs-12">
+                        <input id="{{ a }}" class="form-control col-md-7 col-xs-12" name="name" value="{{ b }}" >
                       </div>
                     </div>
                 {% endif %}
@@ -175,7 +243,7 @@
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-5">
                         <button type="submit" class="btn btn-primary">Volver</button>
-                        <button type="submit" class="btn btn-primary" value="Submit">Guardar</button>
+                        <button type="submit" class="btn btn-primary" value="submit">Guardar</button>
                       </div>
                     </div>
  </form>
