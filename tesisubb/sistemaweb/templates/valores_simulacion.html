@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+
+{% block header %}  <h2>Simular IDF  <small>PROTOTIPO WEB</small></h2> {% endblock %}
+
+
+
+{% block content %}
+{{ lista_de_valores }}
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                 <p class="text-muted font-13 m-b-30">
+                    <h2> Valores Demanda Energetica | Archivo de Simulación N°{{args}}</h2>
+                 </p>
+                 <br>
+                 <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
+
+                      <tr>
+                           <td> ID Simulación</td>
+                                {% for title_html in html %}
+                                <th>{{ title_html }}</th>
+                               {% endfor %}
+
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      <tr>
+                          <td> {{args}} </td>
+                          {% for valor in valores %}
+
+                              <td> {{ valor }} </td>
+                              <!--<td>HOLA 1</td>-->
+                              <!--<td>HOLA 1</td>-->
+
+                        {% endfor %}
+                              <!--<td><a href="modificar/{{ modificacion.modificar_id  }}" class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Modificar </a></td>-->
+                      </tr>
+
+                    </tbody>
+
+                 </table>
+            </div>
+        </div>
+ </div>
+
+
+
+
+
+{% endblock %}
+
+{% load staticfiles %}
+
