@@ -35,7 +35,9 @@
                               <td> {{ simular.simular_id }} </td>
                               <td>{{ simular.simular_archivo_idf }}</td>
                               <td>{{ simular.simular_clima}}</td>
-                              <td><a href="ver/simulacion_{{ simular.simular_id }}" class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Reporte Simulación </a>
+                          <td> <a href="ver_demanda/{{ simular.simular_id }}" class="btn btn-success btn-xs"> <i class="fa fa-area-chart" ></i> &nbsp; Valores Demandas Energéticas </a>
+                              <a href="ver/simulacion_{{ simular.simular_id }}" class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Reporte Simulación </a>
+                               </td>
                       </tr>
                      {% endfor %}
                     </tbody>
