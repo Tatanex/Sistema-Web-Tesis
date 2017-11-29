@@ -1,14 +1,8 @@
 {% extends 'layout.html' %}
-
-
 {% block header %}  <h2>Comparar IDF's  <small>PROTOTIPO WEB</small></h2> {% endblock %}
-
-
 {% load static  %}
 
-
 {% block content %}
-
 {% block jumbotron %}
 {% if form.errors %}
     {% for field in form %}
@@ -24,14 +18,24 @@
         </div>
     {% endfor %}
 {% endif %}
+     {% if message %}
+      <div class="alert alert-danger">
+            <strong>{{ message }}</strong>
+   </div>
+    {% endif %}
+
 {% endblock %}
 
 
-  <div >
+
+
+
+
+  <div class="row" style="height: 500px" >
     <div>
       <div class="container">
         <div class="page-header">
-          <h1>Comparar archivos IDF'S</h1>
+          <h1>&nbsp;&nbsp;Comparar archivos IDF'S</h1>
 
         </div>
                <form  role="form"  enctype="multipart/form-data" action="" method="POST" id="upload-image-form">
@@ -45,7 +49,7 @@
                     <div class="form-group">
                     <label class="label1 control-label col-md-4" data-text="Archivo IDF:">Archivo IDF #1: <span class="required"></span>
                     </label>
-                    <div name="file-upload-field" class="campo1 col-md-6" data-text="ARCHIVO IDF #1 ...">
+                    <div  class="campo1 col-md-6" data-text="ARCHIVO IDF #1 ...">
                      {{ field  }}
                     </div>
                     </div>
@@ -55,7 +59,7 @@
                     <div class="form-group">
                     <label class="label2 control-label col-md-4" data-text="Archivo IDF:">Archivo IDF #2: <span class="required"></span>
                     </label>
-                    <div class="campo2 col-md-6  " data-text="ARCHIVO IDF #2...">
+                    <div class="campo2 col-md-6" data-text="ARCHIVO IDF #2 ...">
                      {{  field  }}
                     </div>
                     </div>
@@ -67,19 +71,123 @@
               <br>
               <br>
 
-              <div align="center" >
-                <button type="submit" class="btn btn-primary" id='upload-btn'>Comparar Archivos</button>
+              <div id='boton_comparar' align="center" >
+                <button type="submit" class="btn btn-primary btn-lg" id='btn_comparar'>Comparar Archivos</button>
               </div>
             </form>
       </div>
     </div>
+
+
+
+            <div  id="loader" style="display:none; margin-left:430px">
+                     <div class="loader">COMPARANDO ...</div>
+            </div>
+
+
+
+<script>
+$(document).ready(function(){
+   var myVar;
+ $( "#btn_comparar" ).click(function() {
+  	myFunction(this);
+});
+
+ function myFunction(div) {
+ $("#loader").toggle();
+
+     $("#boton_comparar").hide();
+
+//
+//     .css({'height':'900px'});
+ $(div).toggle();
+ }
+});
+</script>
+
+
+
+<style>
+      .loader {
+      width: 250px;
+      height: 80px;
+      line-height: 80px;
+      text-align: center;
+      position: absolute;
+      /*top: 60%;*/
+      margin-top: 40px;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      font-family: helvetica, arial, sans-serif;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: #337AB7;
+      letter-spacing: 0.2em;
+      background: #ffffff;
+      }
+      .loader::before, .loader::after {
+      content: "";
+      display: block;
+      width: 15px;
+      height: 15px;
+      background: #337AB7;
+      position: absolute;
+      -webkit-animation: load .7s infinite alternate ease-in-out;
+      animation: load .7s infinite alternate ease-in-out;
+      }
+      .loader::before {
+      top: 0;
+      }
+      .loader::after {
+      bottom: 0;
+      }
+      @-webkit-keyframes load {
+      0% {
+      left: 0;
+      height: 30px;
+      width: 15px;
+      }
+      50% {
+      height: 8px;
+      width: 40px;
+      }
+      100% {
+      left: 235px;
+      height: 30px;
+      width: 15px;
+      }
+      }
+
+      @keyframes load {
+      0% {
+      left: 0;
+      height: 30px;
+      width: 15px;
+      }
+      50% {
+      height: 8px;
+      width: 40px;
+      }
+      100% {
+      left: 235px;
+      height: 30px;
+      width: 15px;
+      }
+      }
+</style>
+
+
+
+
+
+
+
+
+
+
   </div>
-
-
-
 {% endblock %}
 
-
-{% load static  %}
 
 
