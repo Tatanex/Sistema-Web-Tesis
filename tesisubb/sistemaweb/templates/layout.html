@@ -15,11 +15,12 @@
   <!-- Bootstrap core CSS -->
   {% load staticfiles %}
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
   <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">-->
 
 
 
+  <link href="{% static 'fonts/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'fonts/css/font-awesome.min.css' %}" rel="stylesheet">
   <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
 
@@ -29,8 +30,10 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.4/jquery-jvectormap.css" />
   <link href="{% static 'css/icheck/flat/green.css' %}" rel="stylesheet" />
   <link href="{% static 'css/floatexamples.css' %}" rel="stylesheet" type="text/css" />
-  <link href="{% static 'js/datatables/jquery.dataTables.min.css' %}" rel="stylesheet" />
-  <link href="{% static 'js/datatables/buttons.bootstrap.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/datatables/buttons.bootstrap.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/datatables/datatable_style.css' %}" rel="stylesheet" />
+
   <link href="{% static 'js/datatables/fixedHeader.bootstrap.min.css' %}" rel="stylesheet" />
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'js/nprogress.js' %}"></script>
@@ -73,7 +76,7 @@
               <ul class="nav side-menu">
                 <li><a href="{%   url 'index' %}"><i class="fa fa-home"></i> Inicio </a>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Simular IDF <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-caret-square-o-right"></i> Simular IDF <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                      <li><a href="{% url 'ver_simulaciones' %}">Ver Simulaciones</a>
                     </li>
@@ -81,7 +84,7 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-desktop"></i> Modificar IDF <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-pencil-square-o"></i> Modificar IDF <span class="fa fa-chevron-down"></span></a>
                  <ul class="nav child_menu" style="display: none">
                     <li><a href="{% url 'ver_modificaciones' %}">Ver Modificaciones</a>
                     </li>
@@ -89,7 +92,7 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-table"></i> Comparar IDF's <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-files-o"></i> Comparar IDF's <span class="fa fa-chevron-down"></span></a>
                    <ul class="nav child_menu" style="display: none">
                     <li><a href="{% url 'ver_comparaciones' %}">Ver Comparaciones</a>
                     </li>
@@ -97,14 +100,30 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-bar-chart-o"></i> Materiales <span class="fa fa-chevron-down"></span></a>
+                <!--<li><a><i class="fa fa-bar-chart-o"></i> Materiales <span class="fa fa-chevron-down"></span></a>-->
+                    <!--<ul class="nav child_menu" style="display: none">-->
+                    <!--<li><a href="{% url 'ver_materials' %}">Ver listado de materiales </a>-->
+                    <!--</li>-->
+                    <!--<li><a href="{% url 'crear_materials' %}">Agregar Material</a>-->
+                    <!--</li>-->
+                  <!--</ul>-->
+                <!--</li>-->
+
+                <li><a><i class="fa fa-modx"></i> Combinar Mejoras <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
-                    <li><a href="{% url 'ver_materials' %}">Ver listado de materiales </a>
+                    <li><a href="{% url 'ver_combinaciones' %}">Ver Combinaciones </a>
                     </li>
-                    <li><a href="{% url 'crear_materials' %}">Agregar Material</a>
+                    <li><a href="{% url 'request_combinar' %}">Combinar alternativas</a>
                     </li>
                   </ul>
                 </li>
+
+
+                  </ul>
+                </li>
+
+
+
               </ul>
             </div>
           </div>
@@ -167,7 +186,7 @@
         <!--</div>-->
         <!-- /top tiles -->
 
-        <div class="">
+        <div class="content">
           <div class="clearfix"></div>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -194,7 +213,7 @@
                     </div>
                     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                       <div class="tile-stats">
-                        <div class="icon"><i class="fa fa-comments-o"></i>
+                        <div class="icon"><i class="fa fa-pencil-square-o"></i>
                         </div>
                         <div class="count">{{ modificacion }} </div>
 
@@ -204,7 +223,7 @@
                     </div>
                     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                       <div class="tile-stats">
-                        <div class="icon"><i class="fa fa-sort-amount-desc"></i>
+                        <div class="icon"><i class="fa fa-files-o"></i>
                         </div>
                         <div class="count">{{ comparacion }} </div>
 
@@ -214,9 +233,9 @@
                     </div>
                     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                       <div class="tile-stats">
-                        <div class="icon"><i class="fa fa-check-square-o"></i>
+                        <div class="icon"><i class="fa fa-modx"></i>
                         </div>
-                        <div class="count">179</div>
+                        <div class="count">{{ combinacion }} </div>
 
                         <h3>Combinaciones</h3>
                         <p>Última combinación.</p>
@@ -249,9 +268,11 @@
 
 {% load staticfiles %}
 
-<script src="{% static 'js/datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/datatables/jquery.dataTablesjs' %}"></script>
 <script src="{% static 'js/datatables/tools/js/dataTables.tableTools.js' %}"></script>
 <script src="{% static 'js/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/datatables/jquery-1.12.4' %}"></script>
+<script src="{% static 'js/datatables/datatable_es.js' %}"></script>
 <script src="{% static 'js/datatables/dataTables.bootstrap.js' %}"></script>
 <script src="{% static 'js/datatables/dataTables.buttons.min.js' %}"></script>
 <script src="{% static 'js/datatables/buttons.bootstrap.min.js' %}"></script>
