@@ -31,7 +31,6 @@
                           <input id="radio1" name="clase" type="radio" value="a">
                           <label for="radio1" class="radio-label">MATERIAL</label>
 
-
                           <input id="radio2" name="clase" type="radio" value="b">
                           <label for="radio2" class="radio-label">MATERIAL:NOMASS</label>
                   </div>
@@ -43,7 +42,8 @@
                     <thead>
                       <tr>
                         <th>#ID</th>
-                        <th>Nombre Objeto</th>
+                        <th>Nombre DesignBuilder</th>
+                        <th>Nombre DSB </th>
                         <th>Clase</th>
                         <th>Editar Objeto</th>
                       </tr>
@@ -53,8 +53,9 @@
                       <tr>
                         <th scope="row">{{ forloop.counter }} </th>
                         <td>  {{ material.Name }}</td>
+                        <td>555 </td>
                         <td>Material</td>
-                        <td><a href="modificar/{{modificacion.modificar_id  }}/{{ materials }}/{{ material.Name  }}" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" ></i> &nbsp; Editar Objeto </a>
+                          <td><a href="modificar/{{modificacion.modificar_id  }}/{{ materials }}/{{ material.Name  }}" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" ></i> &nbsp; Editar Objeto </a> </td>
                       </tr>
                     {% endfor %}
                     </tbody>
@@ -68,6 +69,7 @@
                       <tr>
                         <th>#ID</th>
                         <th>Nombre Objeto</th>
+                        <th>Nombre DSB </th>
                         <th>Clase</th>
                         <th>Editar Objeto</th>
                       </tr>
@@ -78,8 +80,10 @@
                       <tr>
                         <th scope="row">{{ forloop.counter }} </th>
                         <td>  {{ material.Name }}</td>
+                        <td> 55 </td>
                         <td>Material:NoMass</td>
-                        <td><a href="modificar/{{ modificacion.modificar_id }}/{{ material_nomass }}/{{ material.Name }}" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" ></i> &nbsp; Editar Objeto </a>
+                          <td><a href="modificar/{{ modificacion.modificar_id }}/{{ material_nomass }}/{{ material.Name }}" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" ></i> &nbsp; Editar Objeto </a> </td>
+
                       </tr>
                     {% endfor %}
                     </tbody>
