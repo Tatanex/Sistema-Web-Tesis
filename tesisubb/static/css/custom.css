@@ -786,13 +786,13 @@ h2 {
   border-bottom: 1px solid #efefef;
 }
 .accordion .panel-heading {
-  background: #F2F5F7;
+  background: transparent;
   padding: 13px;
   width: 100%;
   display: block;
 }
 .accordion .panel:hover {
-  background: #F2F5F7;
+  background: transparent;
 }
 .x_panel {
   position: relative;
