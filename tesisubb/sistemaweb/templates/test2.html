@@ -52,6 +52,7 @@
                                    {% load split_plus %}
                                    {% load query_construction %}
                                    {% load length_object %}
+                                   {% load length_object2 %}
                                    {% load get_div%}
                                    {% for c_k, c_v in clase_construccion.items %}
                                       {% for y in c_v %}
@@ -793,7 +794,6 @@
                     {% for keys,values in diccionario_idf1.items %}
                        {% for k_diferencias,v_diferencias in resultado_alternativa_idf1.items %}
                           {% if keys == "MATERIAL" and k_diferencias == "MATERIAL" %}
-
                           <div class="accordion" id="accordion" role="tablist">
                             <div class="panel">
                               <a class="panel-heading bg-blue" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -944,263 +944,932 @@
 
 
             <!--ARCHIVO IDF #2-->
-            <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 0">
-                 <div class="panel-group">
-                      <div class="x_title">
-                           <h2> {{ ruta_idf2 }} </h2>
-                      <div class="clearfix"></div>
-                 </div>
-                 <div class="x_content panel-group ">
-                      <div class="accordion" id="accordionnine" role="tablist">
-                           <div class="panel">
-                                <a class="panel-heading bg-blue" role="tab" id="headingNine" data-toggle="collapse" data-parent="#accordion9" href="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
-                                   <h4 class="panel-title ">  CLASE {{ tag_construcction }}</h4>
-                                </a>
-                                <div  id="collapseNine" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingNine">
-                                          <div class="panel-body" >
-                                   {% load get_index %}
-                                   {% load get_key %}
-                                   {% load increment %}
-                                   {% load get_material %}
-                                   {% load split_plus %}
-                                   {% for c_k, c_v in clase_construccion2.items %}
-                                      {% for y in c_v %}
-                                        {% for diff_k, diff_v in construccion_diff_1.items %}
-                                           {% for value in  diff_v  %}
-                                              {% for diff_key, diff_value in  value.items %}
-                                           {% if diff_key == y.fieldvalues|get_index:1 %}
-                                           <table class="table" id="major20">
-                                              <thead>
-                                              <tr>
-                                                <th>Nombre Construcción</th>
-                                                <th> Capas
-                                                     <th>Materiales</th>
-                                                </th>
-                                                <!--<th>Materiales</th>-->
-                                              </tr>
-                                                </thead>
-                                                <tbody>
-                                                <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
-                                                <td>
-                                                <table class="table  table-hover">
-                                                       <tbody>
-                                                           {% for llave in y.fieldvalues|increment %}
-                                                           <tbody>
-                                                           <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
-                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
-                                                                <td>Capa exterior: </td>
-                                                            {% endif %}
-                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
-                                                                <td>Capa 2: </td>
-                                                            {% endif %}
-                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
-                                                                <td>Capa 3: </td>
-                                                            {% endif %}
-                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
-                                                                <td>Capa 4: </td>
-                                                            {% endif %}
-                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
-                                                                <td>Capa 5:</td>
-                                                            {% endif %}
-                                                           </tbody>
-                                                           {% endfor %}
-                                                       </tbody>
-                                                </table>
-                                                </td>
-                                                <td>
-                                                <table class="table  table-hover">
-                                                 <tbody>
-                                                         {% for llave in y.fieldvalues|increment %}
-                                                               <tbody>
-                                                                {%if  llave  in diff_value %}
-                                                                       <td  class="bg-success has-success">{{llave|get_material}}</td>
-                                                                {% else %}
-                                                                    <td>{{llave|get_material}}</td>
-                                                                {% endif %}
-                                                               </tbody>
-                                                       {% endfor %}
-                                                       </tbody>
-                                                </table>
-                                                </tbody>
-                                           </table>
-                                      {%endif%}
-                                   {%endfor%}
-                                   {%endfor%}
-                                   {%endfor%}
-                                   {%endfor%}
-                                   {%endfor%}
-                              </div>
-
-                                </div>
-                           </div>
-                      </div>
+    <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 0">
+        <div class="panel-group">
+            <div class="x_title">
+                <h2> {{ ruta_idf2 }} </h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content panel-group ">
+                <div class="accordion" id="accordionnine" role="tablist">
+                    <div class="panel">
+                        <a class="panel-heading bg-blue" role="tab" id="headingNine" data-toggle="collapse" data-parent="#accordion9" href="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                            <h4 class="panel-title ">  CLASE {{ tag_construcction }}</h4>
+                        </a>
+                        <div id="collapseNine" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingNine">
+                            <div class="panel-body" >
 
 
-                    {% for keys,values in diccionario_idf2.items %}
-                    {% for k_diferencias,v_diferencias in resultado_alternativa_idf2.items %}
-                    {% if keys == "MATERIAL" and k_diferencias == "MATERIAL" %}
-                    <div class="accordion" id="accordion10" role="tablist">
-                         <div class="panel" >
-                         <a class="panel-heading bg-blue" role="tab" id="headingTen" data-toggle="collapse" data-parent="#accordion10" href="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                                {% for c_k, c_v2 in clase_construccion2.items %}
+                                      {% for y in c_v2 %}
+                                         {% if y.fieldvalues|get_index:1 == 'LinearBridgingConstruction' or y.fieldvalues|get_index:1 == 'IRTSurface' %}
+
+                                         {% else %}
+
+                                            {% if y.fieldvalues|get_index:1 in c_diff_keys_2 %}
+
+                                               {% if y.fieldvalues|get_index:1 == '1' %}
+                                                  {% with objetos_construccion2|length_object2:1  as a %}
+                                                     {% with objetos_construccion|length_object2:1  as b %}
+                                                        {% with b|get_div:a as div1_2 %}
+
+                                                           <div id="1_2" data-ref="{{div1_2}}">
+                                                               <table class="table" id="major01_2">
+                                                                      <thead>
+                                                                      <tr>
+                                                                        <th>Nombre Construcción</th>
+                                                                        <th> Capas
+                                                                             <th>Materiales</th>
+                                                                        </th>
+
+                                                                      </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                        <td>
+                                                                        <table class="table  table-hover">
+                                                                               <tbody>
+                                                                                   {% for llave in y.fieldvalues|increment %}
+                                                                                   <tbody>
+                                                                                   <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                        <td>Capa exterior: </td>
+                                                                                    {% endif %}
+                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                        <td>Capa 2: </td>
+                                                                                    {% endif %}
+                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                        <td>Capa 3: </td>
+                                                                                    {% endif %}
+                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                        <td>Capa 4: </td>
+                                                                                    {% endif %}
+                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                        <td>Capa 5:</td>
+                                                                                    {% endif %}
+                                                                                   </tbody>
+                                                                                   {% endfor %}
+                                                                               </tbody>
+                                                                        </table>
+                                                                        </td>
+                                                                        <td>
+                                                                        <table class="table  table-hover">
+                                                                         <tbody>
+                                                                                 {% for llave_2 in y.fieldvalues|increment %}
+                                                                                       <tbody>
+                                                                                        {%if  llave_2  in c_diff_values_2 %}
+                                                                                               <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                        {% else %}
+                                                                                            <td>{{llave_2|get_material}}</td>
+                                                                                        {% endif %}
+                                                                                       </tbody>
+                                                                               {% endfor %}
+                                                                               </tbody>
+                                                                        </table>
+                                                                        </tbody>
+                                                                   </table>
+                                                           </div>
+                                                        {% endwith %}
+                                                        <script>
+                                                            var x = document.getElementById("1_2");
+                                                            var altura = document.getElementById("1_2").getAttribute('data-ref');
+                                                            x.style.height = altura+'px';
+                                                        </script>
+                                                     {% endwith %}
+                                                  {% endwith %}
+                                               {% else %}
+                                                   {% if y.fieldvalues|get_index:1 == '2' %}
+                                                      {% with objetos_construccion2|length_object2:2  as a %}
+                                                         {% with objetos_construccion|length_object2:2  as b %}
+                                                            {% with b|get_div:a as div2_2 %}
+                                                               <div id="2_2" data-ref="{{div2_2}}">
+                                                                   <table class="table" id="major02_2">
+                                                                          <thead>
+                                                                          <tr>
+                                                                            <th>Nombre Construcción</th>
+                                                                            <th> Capas
+                                                                                 <th>Materiales</th>
+                                                                            </th>
+
+                                                                          </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                            <td>
+                                                                            <table class="table  table-hover">
+                                                                                   <tbody>
+                                                                                       {% for llave in y.fieldvalues|increment %}
+                                                                                       <tbody>
+                                                                                       <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                            <td>Capa exterior: </td>
+                                                                                        {% endif %}
+                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                            <td>Capa 2: </td>
+                                                                                        {% endif %}
+                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                            <td>Capa 3: </td>
+                                                                                        {% endif %}
+                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                            <td>Capa 4: </td>
+                                                                                        {% endif %}
+                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                            <td>Capa 5:</td>
+                                                                                        {% endif %}
+                                                                                       </tbody>
+                                                                                       {% endfor %}
+                                                                                   </tbody>
+                                                                            </table>
+                                                                            </td>
+                                                                            <td>
+                                                                            <table class="table  table-hover">
+                                                                             <tbody>
+                                                                                     {% for llave_2 in y.fieldvalues|increment %}
+                                                                                           <tbody>
+                                                                                            {%if  llave_2  in c_diff_values_2 %}
+                                                                                                   <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                            {% else %}
+                                                                                                <td>{{llave_2|get_material}}</td>
+                                                                                            {% endif %}
+                                                                                           </tbody>
+                                                                                   {% endfor %}
+                                                                                   </tbody>
+                                                                            </table>
+                                                                            </tbody>
+                                                                       </table>
+                                                               </div>
+                                                            {% endwith %}
+                                                            <script>
+                                                                var x = document.getElementById("2_2");
+                                                                var altura = document.getElementById("2_2").getAttribute('data-ref');
+                                                                x.style.height = altura+'px';
+                                                            </script>
+                                                         {% endwith %}
+                                                      {% endwith %}
+                                                   {% else %}
+                                                       {% if y.fieldvalues|get_index:1 == '3' %}
+                                                            {% with objetos_construccion2|length_object2:3  as a %}
+                                                                {% with objetos_construccion|length_object2:3  as b %}
+                                                                    {% with b|get_div:a as div3_2 %}
+                                                                        <div id="3_2" data-ref="{{div3_2}}">
+                                                                           <table class="table" id="major03_2">
+                                                                                  <thead>
+                                                                                  <tr>
+                                                                                    <th>Nombre Construcción</th>
+                                                                                    <th> Capas
+                                                                                         <th>Materiales</th>
+                                                                                    </th>
+
+                                                                                  </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                                    <td>
+                                                                                    <table class="table  table-hover">
+                                                                                           <tbody>
+                                                                                               {% for llave in y.fieldvalues|increment %}
+                                                                                               <tbody>
+                                                                                               <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                                    <td>Capa exterior: </td>
+                                                                                                {% endif %}
+                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                                    <td>Capa 2: </td>
+                                                                                                {% endif %}
+                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                                    <td>Capa 3: </td>
+                                                                                                {% endif %}
+                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                                    <td>Capa 4: </td>
+                                                                                                {% endif %}
+                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                                    <td>Capa 5:</td>
+                                                                                                {% endif %}
+                                                                                               </tbody>
+                                                                                               {% endfor %}
+                                                                                           </tbody>
+                                                                                    </table>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                    <table class="table  table-hover">
+                                                                                     <tbody>
+                                                                                             {% for llave_2 in y.fieldvalues|increment %}
+                                                                                                   <tbody>
+                                                                                                    {%if  llave_2  in c_diff_values_2 %}
+                                                                                                           <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                                    {% else %}
+                                                                                                        <td>{{llave_2|get_material}}</td>
+                                                                                                    {% endif %}
+                                                                                                   </tbody>
+                                                                                           {% endfor %}
+                                                                                           </tbody>
+                                                                                    </table>
+                                                                                    </tbody>
+                                                                               </table>
+                                                                        </div>
+                                                                    {% endwith %}
+                                                                    <script>
+                                                                        var x = document.getElementById("3_2");
+                                                                        var altura = document.getElementById("3_2").getAttribute('data-ref');
+                                                                        x.style.height = altura+'px';
+                                                                    </script>
+                                                                {% endwith %}
+                                                            {% endwith %}
+                                                       {% else %}
+                                                            {% if y.fieldvalues|get_index:1 == '4' %}
+                                                                {% with objetos_construccion2|length_object2:4  as a %}
+                                                                    {% with objetos_construccion|length_object2:4  as b %}
+                                                                        {% with b|get_div:a as div4_2 %}
+                                                                            <div id="4_2" data-ref="{{div4_2}}">
+                                                                               <table class="table" id="major04_2">
+                                                                                      <thead>
+                                                                                      <tr>
+                                                                                        <th>Nombre Construcción</th>
+                                                                                        <th> Capas
+                                                                                             <th>Materiales</th>
+                                                                                        </th>
+
+                                                                                      </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                                        <td>
+                                                                                        <table class="table  table-hover">
+                                                                                               <tbody>
+                                                                                                   {% for llave in y.fieldvalues|increment %}
+                                                                                                   <tbody>
+                                                                                                   <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                                        <td>Capa exterior: </td>
+                                                                                                    {% endif %}
+                                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                                        <td>Capa 2: </td>
+                                                                                                    {% endif %}
+                                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                                        <td>Capa 3: </td>
+                                                                                                    {% endif %}
+                                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                                        <td>Capa 4: </td>
+                                                                                                    {% endif %}
+                                                                                                    {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                                        <td>Capa 5:</td>
+                                                                                                    {% endif %}
+                                                                                                   </tbody>
+                                                                                                   {% endfor %}
+                                                                                               </tbody>
+                                                                                        </table>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                        <table class="table  table-hover">
+                                                                                         <tbody>
+                                                                                                 {% for llave_2 in y.fieldvalues|increment %}
+                                                                                                       <tbody>
+                                                                                                        {%if  llave_2  in c_diff_values_2 %}
+                                                                                                               <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                                        {% else %}
+                                                                                                            <td>{{llave_2|get_material}}</td>
+                                                                                                        {% endif %}
+                                                                                                       </tbody>
+                                                                                               {% endfor %}
+                                                                                               </tbody>
+                                                                                        </table>
+                                                                                        </tbody>
+                                                                                   </table>
+                                                                            </div>
+                                                                        {% endwith %}
+                                                                        <script>
+                                                                            var x = document.getElementById("4_2");
+                                                                            var altura = document.getElementById("4_2").getAttribute('data-ref');
+                                                                            x.style.height = altura+'px';
+                                                                        </script>
+                                                                    {% endwith %}
+                                                                {% endwith %}
+                                                            {% else %}
+                                                               {% if y.fieldvalues|get_index:1 == '5' %}
+                                                                  {% with objetos_construccion2|length_object2:5  as a %}
+                                                                     {% with objetos_construccion|length_object2:5  as b %}
+                                                                        {% with b|get_div:a as div5_2 %}
+                                                                           <div id="5_2" data-ref="{{div5_2}}">
+                                                                                   <table class="table" id="major05_2">
+                                                                                          <thead>
+                                                                                          <tr>
+                                                                                            <th>Nombre Construcción</th>
+                                                                                            <th> Capas
+                                                                                                 <th>Materiales</th>
+                                                                                            </th>
+
+                                                                                          </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                            <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                                            <td>
+                                                                                            <table class="table  table-hover">
+                                                                                                   <tbody>
+                                                                                                       {% for llave in y.fieldvalues|increment %}
+                                                                                                       <tbody>
+                                                                                                       <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                                            <td>Capa exterior: </td>
+                                                                                                        {% endif %}
+                                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                                            <td>Capa 2: </td>
+                                                                                                        {% endif %}
+                                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                                            <td>Capa 3: </td>
+                                                                                                        {% endif %}
+                                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                                            <td>Capa 4: </td>
+                                                                                                        {% endif %}
+                                                                                                        {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                                            <td>Capa 5:</td>
+                                                                                                        {% endif %}
+                                                                                                       </tbody>
+                                                                                                       {% endfor %}
+                                                                                                   </tbody>
+                                                                                            </table>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                            <table class="table  table-hover">
+                                                                                             <tbody>
+                                                                                                     {% for llave_2 in y.fieldvalues|increment %}
+                                                                                                           <tbody>
+                                                                                                            {%if  llave_2  in c_diff_values_2 %}
+                                                                                                                   <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                                            {% else %}
+                                                                                                                <td>{{llave_2|get_material}}</td>
+                                                                                                            {% endif %}
+                                                                                                           </tbody>
+                                                                                                   {% endfor %}
+                                                                                                   </tbody>
+                                                                                            </table>
+                                                                                            </tbody>
+                                                                                       </table>
+                                                                           </div>
+                                                                        {% endwith %}
+                                                                        <script>
+                                                                            var x = document.getElementById("5_2");
+                                                                            var altura = document.getElementById("5_2").getAttribute('data-ref');
+                                                                            x.style.height = altura+'px';
+                                                                        </script>
+                                                                     {% endwith %}
+                                                                  {% endwith %}
+                                                               {% else %}
+                                                                  {% if y.fieldvalues|get_index:1 == '6' %}
+                                                                     {% with objetos_construccion2|length_object2:6  as a %}
+                                                                        {% with objetos_construccion|length_object2:6  as b %}
+                                                                           {% with b|get_div:a as div6_2 %}
+
+                                                                              <div id="6_2" data-ref="{{div6_2}}">
+
+                                                                                       <table class="table" id="major06_2">
+                                                                                              <thead>
+                                                                                              <tr>
+                                                                                                <th>Nombre Construcción</th>
+                                                                                                <th> Capas
+                                                                                                     <th>Materiales</th>
+                                                                                                </th>
+
+                                                                                              </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                                                <td>
+                                                                                                <table class="table  table-hover">
+                                                                                                       <tbody>
+                                                                                                           {% for llave in y.fieldvalues|increment %}
+                                                                                                           <tbody>
+                                                                                                           <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                                                <td>Capa exterior: </td>
+                                                                                                            {% endif %}
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                                                <td>Capa 2: </td>
+                                                                                                            {% endif %}
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                                                <td>Capa 3: </td>
+                                                                                                            {% endif %}
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                                                <td>Capa 4: </td>
+                                                                                                            {% endif %}
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                                                <td>Capa 5:</td>
+                                                                                                            {% endif %}
+                                                                                                           </tbody>
+                                                                                                           {% endfor %}
+                                                                                                       </tbody>
+                                                                                                </table>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                <table class="table  table-hover">
+                                                                                                 <tbody>
+                                                                                                         {% for llave_2 in y.fieldvalues|increment %}
+                                                                                                               <tbody>
+                                                                                                                {%if  llave_2  in c_diff_values_2 %}
+                                                                                                                       <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                                                {% else %}
+                                                                                                                    <td>{{llave_2|get_material}}</td>
+                                                                                                                {% endif %}
+                                                                                                               </tbody>
+                                                                                                       {% endfor %}
+                                                                                                       </tbody>
+                                                                                                </table>
+                                                                                                </tbody>
+                                                                                           </table>
+                                                                              </div>
+                                                                           {% endwith %}
+                                                                           <script>
+                                                                                var x = document.getElementById("6_2");
+                                                                                var altura = document.getElementById("6_2").getAttribute('data-ref');
+                                                                                x.style.height = altura+'px';
+                                                                           </script>
+                                                                        {% endwith %}
+                                                                     {% endwith %}
+                                                                  {% else %}
+                                                                     {% if y.fieldvalues|get_index:1 == '7' %}
+                                                                        {% with objetos_construccion2|length_object2:7  as a %}
+                                                                            {% with objetos_construccion|length_object2:7  as b %}
+                                                                                {% with b|get_div:a as div7_2 %}
+                                                                                    <div id="7_2" data-ref="{{div7_2}}">
+                                                                                           <table class="table" id="major07_2">
+                                                                                                  <thead>
+                                                                                                  <tr>
+                                                                                                    <th>Nombre Construcción</th>
+                                                                                                    <th> Capas
+                                                                                                         <th>Materiales</th>
+                                                                                                    </th>
+
+                                                                                                  </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                    <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                                                    <td>
+                                                                                                    <table class="table  table-hover">
+                                                                                                           <tbody>
+                                                                                                               {% for llave in y.fieldvalues|increment %}
+                                                                                                               <tbody>
+                                                                                                               <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                                                    <td>Capa exterior: </td>
+                                                                                                                {% endif %}
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                                                    <td>Capa 2: </td>
+                                                                                                                {% endif %}
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                                                    <td>Capa 3: </td>
+                                                                                                                {% endif %}
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                                                    <td>Capa 4: </td>
+                                                                                                                {% endif %}
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                                                    <td>Capa 5:</td>
+                                                                                                                {% endif %}
+                                                                                                               </tbody>
+                                                                                                               {% endfor %}
+                                                                                                           </tbody>
+                                                                                                    </table>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                    <table class="table  table-hover">
+                                                                                                     <tbody>
+                                                                                                             {% for llave_2 in y.fieldvalues|increment %}
+                                                                                                                   <tbody>
+                                                                                                                    {%if  llave_2  in c_diff_values_2 %}
+                                                                                                                           <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                                                    {% else %}
+                                                                                                                        <td>{{llave_2|get_material}}</td>
+                                                                                                                    {% endif %}
+                                                                                                                   </tbody>
+                                                                                                           {% endfor %}
+                                                                                                           </tbody>
+                                                                                                    </table>
+                                                                                                    </tbody>
+                                                                                               </table>
+                                                                                    </div>
+                                                                                {% endwith %}
+                                                                                <script>
+                                                                                    var x = document.getElementById("7_2");
+                                                                                    var altura = document.getElementById("7_2").getAttribute('data-ref');
+                                                                                    x.style.height = altura+'px';
+                                                                                </script>
+                                                                            {% endwith %}
+                                                                        {% endwith %}
+                                                                     {% else %}
+                                                                        {% if y.fieldvalues|get_index:1 == '8' %}
+                                                                           {% with objetos_construccion2|length_object2:8  as a %}
+                                                                              {% with objetos_construccion|length_object2:8  as b %}
+                                                                                 {% with b|get_div:a as div8_2 %}
+                                                                                    <div id="8_2" data-ref="{{div8_2}}">
+                                                                                       <table class="table" id="major08_2">
+                                                                                              <thead>
+                                                                                              <tr>
+                                                                                                <th>Nombre Construcción</th>
+                                                                                                <th> Capas
+                                                                                                     <th>Materiales</th>
+                                                                                                </th>
+
+                                                                                              </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                                                <td>
+                                                                                                <table class="table  table-hover">
+                                                                                                       <tbody>
+                                                                                                           {% for llave in y.fieldvalues|increment %}
+                                                                                                           <tbody>
+                                                                                                           <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                                                <td>Capa exterior: </td>
+                                                                                                            {% endif %}
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                                                <td>Capa 2: </td>
+                                                                                                            {% endif %}
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                                                <td>Capa 3: </td>
+                                                                                                            {% endif %}
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                                                <td>Capa 4: </td>
+                                                                                                            {% endif %}
+                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                                                <td>Capa 5:</td>
+                                                                                                            {% endif %}
+                                                                                                           </tbody>
+                                                                                                           {% endfor %}
+                                                                                                       </tbody>
+                                                                                                </table>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                <table class="table  table-hover">
+                                                                                                 <tbody>
+                                                                                                         {% for llave_2 in y.fieldvalues|increment %}
+                                                                                                               <tbody>
+                                                                                                                {%if  llave_2  in c_diff_values_2 %}
+                                                                                                                       <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                                                {% else %}
+                                                                                                                    <td>{{llave_2|get_material}}</td>
+                                                                                                                {% endif %}
+                                                                                                               </tbody>
+                                                                                                       {% endfor %}
+                                                                                                       </tbody>
+                                                                                                </table>
+                                                                                                </tbody>
+                                                                                           </table>
+                                                                                    </div>
+                                                                                 {% endwith %}
+                                                                                 <script>
+                                                                                        var x = document.getElementById("8_2");
+                                                                                        var altura = document.getElementById("8_2").getAttribute('data-ref');
+                                                                                        x.style.height = altura+'px';
+                                                                                 </script>
+                                                                              {% endwith %}
+                                                                           {% endwith %}
+                                                                        {% else %}
+                                                                           {% if y.fieldvalues|get_index:1 == '9' %}
+                                                                              {% with objetos_construccion2|length_object2:9  as a %}
+                                                                                 {% with objetos_construccion|length_object2:9  as b %}
+                                                                                    {% with b|get_div:a as div9_2 %}
+                                                                                        <div id="9_2" data-ref="{{div9_2}}">
+                                                                                           <table class="table" id="major09_2">
+                                                                                                  <thead>
+                                                                                                  <tr>
+                                                                                                    <th>Nombre Construcción</th>
+                                                                                                    <th> Capas
+                                                                                                         <th>Materiales</th>
+                                                                                                    </th>
+
+                                                                                                  </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                    <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                                                    <td>
+                                                                                                    <table class="table  table-hover">
+                                                                                                           <tbody>
+                                                                                                               {% for llave in y.fieldvalues|increment %}
+                                                                                                               <tbody>
+                                                                                                               <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                                                    <td>Capa exterior: </td>
+                                                                                                                {% endif %}
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                                                    <td>Capa 2: </td>
+                                                                                                                {% endif %}
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                                                    <td>Capa 3: </td>
+                                                                                                                {% endif %}
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                                                    <td>Capa 4: </td>
+                                                                                                                {% endif %}
+                                                                                                                {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                                                    <td>Capa 5:</td>
+                                                                                                                {% endif %}
+                                                                                                               </tbody>
+                                                                                                               {% endfor %}
+                                                                                                           </tbody>
+                                                                                                    </table>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                    <table class="table  table-hover">
+                                                                                                     <tbody>
+                                                                                                             {% for llave_2 in y.fieldvalues|increment %}
+                                                                                                                   <tbody>
+                                                                                                                    {%if  llave_2  in c_diff_values_2 %}
+                                                                                                                           <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                                                    {% else %}
+                                                                                                                        <td>{{llave_2|get_material}}</td>
+                                                                                                                    {% endif %}
+                                                                                                                   </tbody>
+                                                                                                           {% endfor %}
+                                                                                                           </tbody>
+                                                                                                    </table>
+                                                                                                    </tbody>
+                                                                                               </table>
+                                                                                        </div>
+                                                                                    {% endwith %}
+                                                                                    <script>
+                                                                                        var x = document.getElementById("9_2");
+                                                                                        var altura = document.getElementById("9_2").getAttribute('data-ref');
+                                                                                        x.style.height = altura+'px';
+                                                                                    </script>
+                                                                                 {% endwith %}
+                                                                              {% endwith %}
+                                                                           {% else %}
+                                                                               {% if y.fieldvalues|get_index:1 == '10' %}
+                                                                                  {% with objetos_construccion2|length_object2:10  as a %}
+                                                                                     {% with objetos_construccion|length_object2:10  as b %}
+                                                                                        {% with b|get_div:a as div10_2 %}
+                                                                                            <div id="10_2" data-ref="{{div10_2}}">
+                                                                                               <table class="table" id="major10_2">
+                                                                                                      <thead>
+                                                                                                      <tr>
+                                                                                                        <th>Nombre Construcción</th>
+                                                                                                        <th> Capas
+                                                                                                             <th>Materiales</th>
+                                                                                                        </th>
+
+                                                                                                      </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                        <th scope="row" style="font-size: 30px; margin-left: 20px" >{{ y.fieldvalues.1 }} </th>
+                                                                                                        <td>
+                                                                                                        <table class="table  table-hover">
+                                                                                                               <tbody>
+                                                                                                                   {% for llave in y.fieldvalues|increment %}
+                                                                                                                       <tbody>
+                                                                                                                           <!--<td>{{ y.fieldnames|get_index:forloop.counter }}:</td>-->
+                                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Outside_Layer' %}
+                                                                                                                                <td>Capa exterior: </td>
+                                                                                                                            {% endif %}
+                                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_2' %}
+                                                                                                                                <td>Capa 2: </td>
+                                                                                                                            {% endif %}
+                                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_3' %}
+                                                                                                                                <td>Capa 3: </td>
+                                                                                                                            {% endif %}
+                                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_4' %}
+                                                                                                                                <td>Capa 4: </td>
+                                                                                                                            {% endif %}
+                                                                                                                            {% if  y.fieldnames|get_index:forloop.counter == 'Layer_5' %}
+                                                                                                                                <td>Capa 5:</td>
+                                                                                                                            {% endif %}
+                                                                                                                       </tbody>
+                                                                                                                   {% endfor %}
+                                                                                                               </tbody>
+                                                                                                        </table>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                        <table class="table  table-hover">
+                                                                                                            <tbody>
+                                                                                                                {% for llave_2 in y.fieldvalues|increment %}
+                                                                                                                   <tbody>
+                                                                                                                    {%if  llave_2  in c_diff_values_2 %}
+                                                                                                                        <td  class="bg-success has-success">{{llave_2|get_material}}</td>
+                                                                                                                    {% else %}
+                                                                                                                            <td>{{llave_2|get_material}}</td>
+                                                                                                                    {% endif %}
+                                                                                                                   </tbody>
+                                                                                                                {% endfor %}
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                        </tbody>
+                                                                                                   </table>
+                                                                                            </div>
+                                                                                        {% endwith %}
+                                                                                        <script>
+                                                                                            var x = document.getElementById("10_2");
+                                                                                            var altura = document.getElementById("10_2").getAttribute('data-ref');
+                                                                                            x.style.height = altura+'px';
+                                                                                        </script>
+                                                                                     {% endwith %}
+                                                                                  {% endwith %}
+                                                                               {% else %}
+
+                                                                               {% endif %}
+                                                                           {% endif %}
+                                                                        {% endif %}
+                                                                     {% endif %}
+                                                                  {% endif %}
+                                                               {% endif %}
+                                                            {% endif %}
+                                                       {% endif %}
+                                                   {% endif %}
+                                               {% endif %}
+                                            {% else %}
+                                                    <!--PREGUNTA SI KEY  ESTA EN EL DICCIONARIO 2-->
+                                                    {% if c_diff_keys_1|query_construction:y.fieldvalues.1 > 0 %}
+                                                        {% with objetos_construccion2|length_object2:y.fieldvalues.1  as o %}
+                                                           {% with objetos_construccion|length_object2:y.fieldvalues.1  as p %}
+                                                              {% with o|get_div:p as div_d_2 %}
+
+                                                               <div id="div_diff_2" data-ref="{{div_d_2}}" style="height: 272px">
+                                                                {{ index }}
+                                                               </div>
+                                                              {% endwith %}
+                                                           {% endwith %}
+                                                        {% endwith %}
+                                                    {% else %}
+
+                                                    {% endif %}
+                                            {% endif %}
+                                         {% endif %}
+                                      {% endfor %}
+                                   {% endfor %}
+                                <script>
+                                  var x_diff = document.getElementById("div_diff2");
+                                  var altura_diff = document.getElementById("div_diff2").getAttribute('data-ref');
+                                  x_diff.style.height = altura_diff+'px';
+                                </script>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                {% for keys,values in diccionario_idf2.items %}
+                {% for k_diferencias,v_diferencias in resultado_alternativa_idf2.items %}
+                {% if keys == "MATERIAL" and k_diferencias == "MATERIAL" %}
+                <div class="accordion" id="accordion10" role="tablist">
+                    <div class="panel" >
+                        <a class="panel-heading bg-blue" role="tab" id="headingTen" data-toggle="collapse" data-parent="#accordion10" href="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
                             <h4 class="panel-title panel-primary ">  CLASE   {{ keys }}</h4>
-                         </a>
-                         <div id="collapseTen" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTen">
-                              <div class="panel-body">
-                                   <table class="table table-bordered table-hover">
+                        </a>
+                        <div id="collapseTen" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTen">
+                            <div class="panel-body">
+                                <table class="table table-bordered table-hover">
                                     <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Nombre objeto</th>
-                                            <th>Ver Material</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for valor in values %}
-                                       {% if valor.Name in v_diferencias %}
-                                          {% load split_custom %}
-                                          {% load get_key %}
-                                              {% if valor.Name|split %}
-                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
-                                                 {% with name=valor.Name|split%}
-                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
-                                                    {% if name in diccionario_materiales.keys %}
-                                                       <tr class="bg-success has-success">
-                                                          <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
-                                                           {% if diccionario_materiales|get_key:name %}
-                                                              <td>{{ diccionario_materiales|get_key:name }}</td>
-                                                           {% endif %}
-                                                          <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
-                                                       </tr>
-                                                    {% else %}
-                                                       <tr class="bg-success has-success">
-                                                           <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
-                                                           <!--<td>{{ name }}</td>-->
-                                                           <td>{{valor.Name}}</td>
-                                                           <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
-                                                       </tr>
-                                                    {% endif %}
-                                                 {% endwith %}
-                                              {% endif %}
-                                       {% else %}
-                                               {% load split_custom %}
-                                              {% if valor.Name|split %}
-                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
-                                                 {% with name=valor.Name|split%}
-                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
-                                                    {% if name in diccionario_materiales.keys %}
-                                                       <tr>
-                                                          <th scope="row">{{ forloop.counter }}</th>
-                                                          {% if diccionario_materiales|get_key:name %}
-                                                              <td>{{ diccionario_materiales|get_key:name }}</td>
-                                                          {% endif %}
-                                                          <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
-                                                       </tr>
-                                                    {% else %}
-                                                       <tr>
-                                                           <th scope="row">{{ forloop.counter }}</th>
-                                                           <!--<td>{{ name }}</td>-->
-                                                           <td>{{valor.Name}}</td>
-                                                           <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
-                                                       </tr>
-                                                    {% endif %}
-                                                 {% endwith %}
-                                              {% endif %}
-                                       {% endif %}
-                                    {% endfor %}
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                          </div>
-                          </div>
-                      {% else  %}
-                           {% if keys == "MATERIAL:NOMASS" and  k_diferencias == "MATERIAL:NOMASS"  %}
-                          <div class="accordion" id="accordion11" role="tablist">
-                            <div class="panel">
-                              <a class="panel-heading bg-blue" role="tab" id="headingEleven" data-toggle="collapse" data-parent="#accordion11" href="#collapseEleven" aria-expanded="true" aria-controls="collapseEleven">
-                                <h4 class="panel-title ">  CLASE   {{ keys }}</h4>
-                              </a>
-                              <div  id="collapseEleven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingEleven">
-                                <div class="panel-body" >
-                                          <table class="table table-bordered table-hover">
-                                    <thead>
-                                      <tr>
+                                    <tr>
                                         <th>#</th>
                                         <th>Nombre objeto</th>
                                         <th>Ver Material</th>
-                                      </tr>
+                                    </tr>
                                     </thead>
                                     <tbody>
                                     {% for valor in values %}
-                                       {% if valor.Name in v_diferencias %}
-                                    <!--{{valor.Name}}-->
-                                    <!--{{v_diferencias}}-->
-                                           {% load split_custom %}
-                                           {% load get_key %}
-                                              <!--{% if valor.Name|split %}-->
-                                                <!--{{valor.Name|split }}-->
-                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
-                                                 <!--{% with name=valor.Name|split%}-->
-                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
-
-                                                    {% if valor.Name in diccionario_materiales.keys %}
-                                                       <tr class="bg-success has-success">
-                                                          <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
-                                                           {% if diccionario_materiales|get_key:valor.Name %}
-                                                              <td>{{ diccionario_materiales|get_key:valor.Name }}</td>
-                                                           {% endif %}
-                                                          <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
-                                                       </tr>
-                                                    {% else %}
-                                                       <tr class="bg-success has-success">
-                                                           <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
-                                                           <!--<td>{{ name }}</td>-->
-                                                           <td>{{valor.Name}}</td>
-                                                           <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
-                                                       </tr>
-                                                    {% endif %}
-                                                 <!--{% endwith %}-->
-                                              <!--{% endif %}-->
-                                       {% else %}
-                                               {% load split_custom %}
-                                              <!--{% if valor.Name|split %}-->
-                                                  <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
-                                                 <!--{% with name=valor.Name|split%}-->
-                                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
-                                                    {% if valor.Name in diccionario_materiales.keys %}
-                                                       <tr>
-                                                          <th scope="row">{{ forloop.counter }} </th>
-                                                          {% if diccionario_materiales|get_key:valor.Name  %}
-                                                              <td>{{ diccionario_materiales|get_key:valor.Name  }}</td>
-                                                          {% endif %}
-                                                          <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
-                                                       </tr>
-                                                    {% else %}
-                                                       <tr>
-                                                           <th scope="row">{{ forloop.counter }}</th>
-                                                           <!--<td>{{ name }}</td>-->
-                                                           <td>{{valor.Name}}</td>
-                                                           <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
-                                                       </tr>
-                                                    {% endif %}
-                                                 <!--{% endwith %}-->
-                                              <!--{% endif %}-->
-                                       {% endif %}
+                                    {% if valor.Name in v_diferencias %}
+                                    {% load split_custom %}
+                                    {% load get_key %}
+                                    {% if valor.Name|split %}
+                                    <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                    {% with name=valor.Name|split%}
+                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+                                    {% if name in diccionario_materiales.keys %}
+                                    <tr class="bg-success has-success">
+                                        <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                        {% if diccionario_materiales|get_key:name %}
+                                        <td>{{ diccionario_materiales|get_key:name }}</td>
+                                        {% endif %}
+                                        <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                    </tr>
+                                    {% else %}
+                                    <tr class="bg-success has-success">
+                                        <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                        <!--<td>{{ name }}</td>-->
+                                        <td>{{valor.Name}}</td>
+                                        <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endwith %}
+                                    {% endif %}
+                                    {% else %}
+                                    {% load split_custom %}
+                                    {% if valor.Name|split %}
+                                    <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                    {% with name=valor.Name|split%}
+                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+                                    {% if name in diccionario_materiales.keys %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        {% if diccionario_materiales|get_key:name %}
+                                        <td>{{ diccionario_materiales|get_key:name }}</td>
+                                        {% endif %}
+                                        <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <!--<td>{{ name }}</td>-->
+                                        <td>{{valor.Name}}</td>
+                                        <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endwith %}
+                                    {% endif %}
+                                    {% endif %}
                                     {% endfor %}
                                     </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                          </div>
-                          </div>
-                    {% endif %}
-                    {% endif %}
-                    {% endfor %}
-                    {% endfor %}
-                    <div class="clearfix"></div>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                {% else  %}
+                {% if keys == "MATERIAL:NOMASS" and  k_diferencias == "MATERIAL:NOMASS"  %}
+                <div class="accordion" id="accordion11" role="tablist">
+                    <div class="panel">
+                        <a class="panel-heading bg-blue" role="tab" id="headingEleven" data-toggle="collapse" data-parent="#accordion11" href="#collapseEleven" aria-expanded="true" aria-controls="collapseEleven">
+                            <h4 class="panel-title ">  CLASE   {{ keys }}</h4>
+                        </a>
+                        <div  id="collapseEleven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingEleven">
+                            <div class="panel-body" >
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre objeto</th>
+                                        <th>Ver Material</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for valor in values %}
+                                    {% if valor.Name in v_diferencias %}
+                                    <!--{{valor.Name}}-->
+                                    <!--{{v_diferencias}}-->
+                                    {% load split_custom %}
+                                    {% load get_key %}
+                                    <!--{% if valor.Name|split %}-->
+                                    <!--{{valor.Name|split }}-->
+                                    <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                    <!--{% with name=valor.Name|split%}-->
+                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+
+                                    {% if valor.Name in diccionario_materiales.keys %}
+                                    <tr class="bg-success has-success">
+                                        <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                        {% if diccionario_materiales|get_key:valor.Name %}
+                                        <td>{{ diccionario_materiales|get_key:valor.Name }}</td>
+                                        {% endif %}
+                                        <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                    </tr>
+                                    {% else %}
+                                    <tr class="bg-success has-success">
+                                        <th scope="row">{{ forloop.counter }} <i class="fa fa-plus" style="margin-left:20%"></i> </th>
+                                        <!--<td>{{ name }}</td>-->
+                                        <td>{{valor.Name}}</td>
+                                        <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                    </tr>
+                                    {% endif %}
+                                    <!--{% endwith %}-->
+                                    <!--{% endif %}-->
+                                    {% else %}
+                                    {% load split_custom %}
+                                    <!--{% if valor.Name|split %}-->
+                                    <!--ASIGNO VARIABLE 'NAME' CON EL VALOR DEL MATERIAL DE XML -->
+                                    <!--{% with name=valor.Name|split%}-->
+                                    <!--PREGUNTO SI LA VARIABLE ESTA EN EL DICCIONARIO ENVIADO DE VIEW-->
+                                    {% if valor.Name in diccionario_materiales.keys %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }} </th>
+                                        {% if diccionario_materiales|get_key:valor.Name  %}
+                                        <td>{{ diccionario_materiales|get_key:valor.Name  }}</td>
+                                        {% endif %}
+                                        <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <!--<td>{{ name }}</td>-->
+                                        <td>{{valor.Name}}</td>
+                                        <td><a href="/detalle/idf_2/{{ id_comparacion }}/{{ keys }}/{{ valor.Name }}"  class="btn btn-primary btn-xs"> <i class="fa fa-folder" ></i> &nbsp; Ver objeto </a></td>
+                                    </tr>
+                                    {% endif %}
+                                    <!--{% endwith %}-->
+                                    <!--{% endif %}-->
+                                    {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+                <div class="clearfix"></div>
             </div>
+        </div>
+    </div>
 </div>
 
 <style>
@@ -1257,7 +1926,8 @@
 table[id=major]{
     border: 1px solid rgb(221, 221, 221)}
 table[id=major01],[id=major02],[id=major03],[id=major04],[id=major05],[id=major06],
-     [id=major07],[id=major08],[id=major09],[id=major10],[id=major11],[id=major12],
+     [id=major07],[id=major08],[id=major09],[id=major10],[id=major01_2],[id=major02_2],[id=major03_2],[id=major04_2],[id=major05_2],[id=major06_2],
+     [id=major07_2],[id=major08_2],[id=major09_2],[id=major10_2],[id=major11],[id=major12],
      [id=major20]{
     border: 1px solid rgb(221, 221, 221)}
 </style>

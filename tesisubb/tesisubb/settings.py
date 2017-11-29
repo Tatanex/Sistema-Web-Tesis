@@ -74,6 +74,7 @@ TEMPLATES = [
             'get_name' : 'sistemaweb.templatetags.get_name',
             'query_construction' : 'sistemaweb.templatetags.query_construction',
             'length_object' : 'sistemaweb.templatetags.length_object',
+            'length_object2' : 'sistemaweb.templatetags.length_object2',
             'get_div' : 'sistemaweb.templatetags.get_div',
 
             }
